@@ -10,10 +10,10 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="PVHS Countdown Clock">
   <meta name="theme-color" content="#007474">
-  <link rel="apple-touch-icon" href="PV_Logo.png?v=9">
-  <link rel="icon" type="image/png" sizes="192x192" href="PV_Logo.png?v=9">
-  <link rel="icon" type="image/png" sizes="512x512" href="PV_Logo.png?v=9">
-  <link rel="shortcut icon" href="PV_Logo.png?v=9">
+  <link rel="apple-touch-icon" href="PV_Logo.png?v=10">
+  <link rel="icon" type="image/png" sizes="192x192" href="PV_Logo.png?v=10">
+  <link rel="icon" type="image/png" sizes="512x512" href="PV_Logo.png?v=10">
+  <link rel="shortcut icon" href="PV_Logo.png?v=10">
   <title>PVHS Countdown Clock</title>
   <style>
     :root {
@@ -73,7 +73,7 @@
       display: flex;
       align-items: stretch;
       justify-content: center;
-      padding: 24px 20px 20px 20px;
+      padding: 18px 18px 16px 18px;
       text-align: center;
       isolation: isolate;
     }
@@ -84,19 +84,19 @@
       inset: 0;
       pointer-events: none;
       background:
-        radial-gradient(circle at center, rgba(255,255,255,0.06) 0%, transparent 36%),
+        radial-gradient(circle at center, rgba(255,255,255,0.06) 0%, transparent 34%),
         radial-gradient(circle at top, rgba(0,116,116,0.22) 0%, transparent 42%);
       z-index: 0;
     }
 
     .ghost-logo {
       position: absolute;
-      top: 50%;
+      top: 54%;
       left: 50%;
-      width: 140%;
+      width: clamp(128%, 140vw, 155%);
       max-width: none;
       transform: translate(-50%, -50%);
-      opacity: 0.075;
+      opacity: 0.072;
       filter: grayscale(100%) contrast(108%) brightness(114%);
       pointer-events: none;
       z-index: 0;
@@ -112,12 +112,12 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      gap: 14px;
+      gap: 10px;
     }
 
     .eyebrow {
       margin: 0;
-      font-size: clamp(16px, 2.2vw, 24px);
+      font-size: clamp(15px, 2vw, 22px);
       line-height: 1.05;
       font-weight: 900;
       letter-spacing: 0.8px;
@@ -137,20 +137,20 @@
     }
 
     .period-card {
-      padding: 18px 16px;
+      padding: 16px 14px 14px 14px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .school-card {
-      padding: 18px 16px 16px 16px;
+      padding: 14px 14px 12px 14px;
     }
 
     .block-label {
-      font-size: clamp(28px, 5vw, 56px);
+      font-size: clamp(28px, 4.9vw, 54px);
       line-height: 0.95;
       font-weight: 900;
       letter-spacing: -0.8px;
@@ -161,7 +161,7 @@
     }
 
     .timer {
-      font-size: clamp(84px, 16vw, 176px);
+      font-size: clamp(84px, 15.5vw, 172px);
       line-height: 0.84;
       font-weight: 900;
       letter-spacing: -4px;
@@ -185,8 +185,8 @@
     }
 
     .subtext {
-      font-size: clamp(13px, 1.8vw, 18px);
-      line-height: 1.35;
+      font-size: clamp(12px, 1.7vw, 17px);
+      line-height: 1.3;
       font-weight: 800;
       color: var(--muted);
       text-transform: uppercase;
@@ -199,13 +199,42 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 2px;
       margin-top: 2px;
     }
 
     .status-row {
-      font-size: clamp(13px, 1.7vw, 17px);
-      line-height: 1.3;
+      font-size: clamp(12px, 1.55vw, 16px);
+      line-height: 1.28;
+      font-weight: 800;
+      color: #d9f2f2;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .weather-row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+
+    .weather-icon {
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .weather-text {
+      font-size: clamp(12px, 1.55vw, 16px);
+      line-height: 1.28;
       font-weight: 800;
       color: #d9f2f2;
       text-transform: uppercase;
@@ -213,17 +242,17 @@
     }
 
     .school-label {
-      font-size: clamp(16px, 2.2vw, 24px);
+      font-size: clamp(15px, 2vw, 22px);
       line-height: 1.05;
       font-weight: 900;
       color: #ffffff;
       text-transform: uppercase;
       letter-spacing: 0.7px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .school-number {
-      font-size: clamp(78px, 14vw, 148px);
+      font-size: clamp(72px, 12.5vw, 132px);
       line-height: 0.9;
       font-weight: 900;
       letter-spacing: -4px;
@@ -236,11 +265,12 @@
     }
 
     .detail-row {
-      font-size: clamp(13px, 1.7vw, 18px);
-      line-height: 1.35;
+      font-size: clamp(12px, 1.55vw, 16px);
+      line-height: 1.28;
       color: #d9f2f2;
       margin: 0;
       font-weight: 800;
+      text-transform: uppercase;
     }
 
     .detail-row strong {
@@ -249,9 +279,9 @@
 
     .footer-note {
       margin-top: auto;
-      padding-top: 6px;
-      font-size: 11px;
-      line-height: 1.35;
+      padding-top: 2px;
+      font-size: 10px;
+      line-height: 1.3;
       color: #b5d4d4;
       text-transform: uppercase;
       font-weight: 700;
@@ -260,12 +290,13 @@
 
     @media (max-width: 700px) {
       .app {
-        padding: 18px 14px 16px 14px;
+        padding: 14px 12px 12px 12px;
         border-radius: 28px;
       }
 
       .ghost-logo {
-        width: 158%;
+        width: clamp(145%, 170vw, 185%);
+        top: 56%;
       }
 
       .period-card,
@@ -285,7 +316,7 @@
       }
 
       .footer-note {
-        font-size: 10px;
+        font-size: 9px;
       }
     }
   </style>
@@ -306,6 +337,11 @@
             <p class="status-row" id="scheduleText">Schedule: --</p>
             <p class="status-row" id="timeText">Time: --</p>
           </div>
+
+          <div class="weather-row">
+            <div class="weather-icon" id="weatherIcon">⛅</div>
+            <p class="weather-text" id="weatherText">Santa Maria Weather Loading</p>
+          </div>
         </div>
 
         <div class="school-card">
@@ -315,7 +351,7 @@
             <strong id="todayLabel">Today:</strong> <span id="todayText">--</span>
           </p>
           <p class="detail-row">
-            <strong>Last Day:</strong> June 10, 2026
+            <strong>Last Day of School:</strong> June 10, 2026
           </p>
         </div>
 
@@ -326,6 +362,7 @@
 
   <script>
     const timeZone = "America/Los_Angeles";
+    const SANTA_MARIA_QUERY = "Santa Maria, California";
 
     const schoolDays = [
       "2026-01-15","2026-01-16",
@@ -427,6 +464,8 @@
       { label: "PASSING", start: "12:55", end: "13:05" },
       { label: "7TH PERIOD", start: "13:05", end: "13:35" }
     ];
+
+    let weatherLoaded = false;
 
     function getCaliforniaNowParts() {
       const now = new Date();
@@ -589,7 +628,7 @@
         const lastBlockEnd = parseTimeString(blocks[blocks.length - 1].end) * 60;
 
         if (currentAbsoluteSeconds < firstBlockStart) {
-          blockLabel.textContent = "School Starts Soon";
+          blockLabel.textContent = "SCHOOL STARTS SOON";
           timerText.textContent = formatRemaining(firstBlockStart - currentAbsoluteSeconds);
           timerText.className = "timer normal";
           subText.textContent = "Time remaining until 1st Period";
@@ -597,7 +636,7 @@
         }
 
         if (currentAbsoluteSeconds >= lastBlockEnd) {
-          blockLabel.textContent = "School Is Out";
+          blockLabel.textContent = "SCHOOL IS OUT";
           timerText.textContent = "00:00";
           timerText.className = "timer normal";
           subText.textContent = "Have a great day";
@@ -620,6 +659,69 @@
       }
     }
 
+    function getWeatherDescription(code) {
+      const map = {
+        0: { label: "Clear", icon: "☀️" },
+        1: { label: "Mostly Clear", icon: "🌤️" },
+        2: { label: "Partly Cloudy", icon: "⛅" },
+        3: { label: "Cloudy", icon: "☁️" },
+        45: { label: "Fog", icon: "🌫️" },
+        48: { label: "Fog", icon: "🌫️" },
+        51: { label: "Light Drizzle", icon: "🌦️" },
+        53: { label: "Drizzle", icon: "🌦️" },
+        55: { label: "Heavy Drizzle", icon: "🌧️" },
+        56: { label: "Freezing Drizzle", icon: "🌧️" },
+        57: { label: "Freezing Drizzle", icon: "🌧️" },
+        61: { label: "Light Rain", icon: "🌦️" },
+        63: { label: "Rain", icon: "🌧️" },
+        65: { label: "Heavy Rain", icon: "🌧️" },
+        66: { label: "Freezing Rain", icon: "🌧️" },
+        67: { label: "Freezing Rain", icon: "🌧️" },
+        71: { label: "Light Snow", icon: "🌨️" },
+        73: { label: "Snow", icon: "🌨️" },
+        75: { label: "Heavy Snow", icon: "❄️" },
+        77: { label: "Snow Grains", icon: "❄️" },
+        80: { label: "Rain Showers", icon: "🌦️" },
+        81: { label: "Rain Showers", icon: "🌧️" },
+        82: { label: "Heavy Showers", icon: "⛈️" },
+        85: { label: "Snow Showers", icon: "🌨️" },
+        86: { label: "Snow Showers", icon: "🌨️" },
+        95: { label: "Thunderstorm", icon: "⛈️" },
+        96: { label: "Storm and Hail", icon: "⛈️" },
+        99: { label: "Storm and Hail", icon: "⛈️" }
+      };
+      return map[code] || { label: "Weather", icon: "⛅" };
+    }
+
+    async function loadWeather() {
+      try {
+        const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(SANTA_MARIA_QUERY)}&count=1&language=en&format=json`;
+        const geoResponse = await fetch(geoUrl);
+        const geoData = await geoResponse.json();
+
+        if (!geoData.results || !geoData.results.length) {
+          throw new Error("No location found");
+        }
+
+        const { latitude, longitude } = geoData.results[0];
+
+        const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code&temperature_unit=fahrenheit&timezone=${encodeURIComponent(timeZone)}`;
+        const weatherResponse = await fetch(weatherUrl);
+        const weatherData = await weatherResponse.json();
+
+        const current = weatherData.current;
+        const weather = getWeatherDescription(current.weather_code);
+        const temp = Math.round(current.temperature_2m);
+
+        document.getElementById("weatherIcon").textContent = weather.icon;
+        document.getElementById("weatherText").textContent = `Santa Maria ${temp}°F ${weather.label}`;
+        weatherLoaded = true;
+      } catch (error) {
+        document.getElementById("weatherIcon").textContent = "⛅";
+        document.getElementById("weatherText").textContent = "Santa Maria Weather Unavailable";
+      }
+    }
+
     function updateApp() {
       const california = getCaliforniaNowParts();
       updateSchoolDays(california);
@@ -627,7 +729,13 @@
     }
 
     updateApp();
+    loadWeather();
     setInterval(updateApp, 1000);
+    setInterval(() => {
+      if (weatherLoaded) {
+        loadWeather();
+      }
+    }, 600000);
   </script>
 </body>
 </html>
