@@ -10,10 +10,10 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="PVHS Extension Search">
   <meta name="theme-color" content="#007474">
-  <link rel="apple-touch-icon" href="PV_Logo.png?v=14">
-  <link rel="icon" type="image/png" sizes="192x192" href="PV_Logo.png?v=14">
-  <link rel="icon" type="image/png" sizes="512x512" href="PV_Logo.png?v=14">
-  <link rel="shortcut icon" href="PV_Logo.png?v=14">
+  <link rel="apple-touch-icon" href="PV_Logo.png?v=20">
+  <link rel="icon" type="image/png" sizes="192x192" href="PV_Logo.png?v=20">
+  <link rel="icon" type="image/png" sizes="512x512" href="PV_Logo.png?v=20">
+  <link rel="shortcut icon" href="PV_Logo.png?v=20">
   <title>PVHS Extension Search</title>
 
   <style>
@@ -25,7 +25,6 @@
       --panel-border: rgba(255,255,255,0.12);
       --shadow: 0 20px 46px rgba(0,0,0,0.30);
       --soft-shadow: 0 12px 24px rgba(0,0,0,0.22);
-      --white-gradient: linear-gradient(180deg, #ffffff 0%, #dceaea 100%);
     }
 
     * {
@@ -36,10 +35,10 @@
     html,
     body {
       width: 100%;
-      min-height: 100%;
+      height: 100%;
       margin: 0;
       padding: 0;
-      overflow-x: hidden;
+      overflow: hidden;
       background: #021414;
     }
 
@@ -51,18 +50,21 @@
 
     .frame {
       width: 100%;
-      min-height: 100vh;
-      min-height: 100dvh;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: env(safe-area-inset-top) 14px env(safe-area-inset-bottom) 14px;
+      padding:
+        max(12px, env(safe-area-inset-top))
+        12px
+        max(12px, env(safe-area-inset-bottom))
+        12px;
     }
 
     .app {
       width: min(100%, 430px);
-      min-height: min(94vh, 920px);
-      min-height: min(94dvh, 920px);
+      aspect-ratio: 430 / 880;
+      max-height: calc(100dvh - 24px);
       border-radius: 34px;
       overflow: hidden;
       position: relative;
@@ -71,9 +73,8 @@
       background:
         radial-gradient(circle at center, rgba(10,34,34,0.94) 0%, rgba(4,20,20,0.98) 46%, rgba(0,116,116,1) 100%);
       display: flex;
-      align-items: stretch;
       justify-content: center;
-      padding: 16px 14px 14px 14px;
+      padding: 18px 18px 16px 18px;
       text-align: center;
       isolation: isolate;
     }
@@ -93,7 +94,7 @@
       position: absolute;
       top: 56%;
       left: 50%;
-      width: 178%;
+      width: 182%;
       max-width: none;
       transform: translate(-50%, -50%);
       opacity: 0.072;
@@ -112,6 +113,38 @@
       flex-direction: column;
       align-items: center;
       gap: 10px;
+      min-height: 100%;
+    }
+
+    .top-actions {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      min-height: 34px;
+      margin-bottom: 2px;
+    }
+
+    .popout-btn {
+      appearance: none;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 9px 11px;
+      background: rgba(255,255,255,0.08);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: var(--soft-shadow);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    .popout-btn:active {
+      transform: scale(0.985);
     }
 
     .topbar {
@@ -159,6 +192,9 @@
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      box-shadow: var(--soft-shadow);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
 
     .search-card,
@@ -179,7 +215,11 @@
     .results-card {
       padding: 12px;
       text-align: left;
-      min-height: 320px;
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     .search-title {
@@ -189,6 +229,7 @@
       font-weight: 900;
       letter-spacing: -0.6px;
       text-transform: uppercase;
+      text-align: center;
     }
 
     .helper-text {
@@ -198,6 +239,7 @@
       font-weight: 800;
       color: var(--muted);
       text-transform: uppercase;
+      text-align: center;
     }
 
     .search-input {
@@ -226,12 +268,24 @@
       color: #dff7f7;
       text-transform: uppercase;
       letter-spacing: 0.4px;
+      text-align: center;
     }
 
     .results-list {
       display: flex;
       flex-direction: column;
       gap: 10px;
+      overflow-y: auto;
+      padding-right: 2px;
+    }
+
+    .results-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .results-list::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.18);
+      border-radius: 999px;
     }
 
     .result-item {
@@ -250,8 +304,7 @@
       text-transform: uppercase;
     }
 
-    .result-role,
-    .result-dept,
+    .result-line,
     .result-ext {
       margin: 0;
       font-size: 12px;
@@ -281,7 +334,7 @@
 
     .footer-note {
       margin-top: auto;
-      padding-top: 2px;
+      padding-top: 6px;
       font-size: 10px;
       line-height: 1.3;
       color: #b5d4d4;
@@ -290,10 +343,30 @@
       letter-spacing: 0.35px;
     }
 
+    @media (max-width: 700px) {
+      .popout-btn {
+        display: none;
+      }
+    }
+
     @media (max-width: 430px) {
-      .app {
+      html,
+      body {
+        overflow-y: auto;
+      }
+
+      .frame {
         min-height: 100vh;
         min-height: 100dvh;
+        height: auto;
+        align-items: flex-start;
+      }
+
+      .app {
+        width: 100%;
+        max-height: none;
+        min-height: calc(100dvh - 24px);
+        aspect-ratio: auto;
         border-radius: 28px;
         padding: 14px 12px 12px 12px;
       }
@@ -302,6 +375,10 @@
       .results-card {
         border-radius: 24px;
       }
+
+      .footer-note {
+        font-size: 9px;
+      }
     }
   </style>
 </head>
@@ -309,7 +386,12 @@
   <div class="frame">
     <div class="app">
       <img src="PV_Logo.png" alt="" class="ghost-logo">
+
       <div class="content">
+        <div class="top-actions">
+          <button id="popoutBtn" class="popout-btn" type="button">Pop Out</button>
+        </div>
+
         <div class="topbar">
           <img src="PV_Logo.png" alt="Pioneer Valley High School logo" class="logo-clear">
           <h1 class="page-title">Extension Search</h1>
@@ -342,7 +424,7 @@
 
   <script>
     const extensionSearch = [
-      { name: "Chris Silva", role: "Industrial Tech", extension: "5322", department: "Industrial Tech", room: "322", keywords: ["silva","chris","industrial tech","ind tech","room 322","322","teacher","photography"] },
+      { name: "Chris Silva", role: "VPA", extension: "5322", department: "VPA", room: "322", keywords: ["silva","chris","vpa","room 322","322","teacher","photography"] },
       { name: "Laura Garcia Solorio", role: "VPA", extension: "5322", department: "VPA", room: "322", keywords: ["laura","garcia","solorio","garcia solorio","vpa","room 322","322","teacher"] },
       { name: "Dr. Paul Robinson", role: "Principal", extension: "5701", department: "Administration", room: "", keywords: ["robinson","paul","dr robinson","principal","administration"] },
       { name: "Araceli Mandujano", role: "Admin Assistant", extension: "5702", department: "Administration", room: "", keywords: ["mandujano","araceli","admin assistant","administration"] },
@@ -353,15 +435,19 @@
       { name: "Jeff Hromadka", role: "Asst Principal", extension: "5709", department: "Administration", room: "", keywords: ["hromadka","jeff","assistant principal","asst principal","administration"] },
       { name: "Fabi Etheridge", role: "Admin Assistant", extension: "5710", department: "Administration", room: "", keywords: ["etheridge","fabi","admin assistant","administration"] },
       { name: "Christian Basulto", role: "Dean", extension: "5122", department: "Administration", room: "", keywords: ["basulto","christian","dean","administration"] },
-      { name: "Karine Perez", role: "Admin Assistant", extension: "5123", department: "Administration", room: "", keywords: ["perez","karine","admin assistant","administration"] },
-      { name: "Receptionist", role: "Front Office", extension: "5770", department: "Administration", room: "", keywords: ["receptionist","front office","office"] },
-      { name: "Attendance Office", role: "Attendance", extension: "5105 / 5107", department: "Attendance", room: "", keywords: ["attendance","attendance office","office"] },
+      { name: "Karine Perez", role: "Admin Assistant", extension: "5123", department: "Administration", room: "", keywords: ["perez","karine","admin assistant","administration","emergency"] },
+
+      { name: "Receptionist", role: "Front Office", extension: "5770", department: "Administration", room: "", keywords: ["receptionist","front office","office","emergency"] },
+      { name: "Attendance Office", role: "Attendance", extension: "5105 / 5107", department: "Attendance", room: "", keywords: ["attendance","attendance office","office","emergency"] },
+      { name: "Technology Help Desk", role: "Help Desk", extension: "4612", department: "Technology", room: "", keywords: ["technology","tech","help desk","it","computer","emergency"] },
+      { name: "Technology Emergency", role: "Technology", extension: "5708", department: "Technology", room: "", keywords: ["technology emergency","tech emergency","technology","emergency"] },
+
+      { name: "Security", role: "Security", extension: "", department: "", room: "", keywords: ["security","campus security","emergency"] },
+
       { name: "Araceli Castro", role: "Attendance", extension: "5105", department: "Attendance", room: "", keywords: ["castro","araceli","attendance"] },
       { name: "Laura Mariscal Mendez", role: "Attendance Assistant", extension: "5107", department: "Attendance", room: "", keywords: ["mariscal","mendez","laura","attendance assistant","attendance"] },
       { name: "Registrar", role: "Records Office", extension: "5764", department: "Records", room: "", keywords: ["registrar","records","records office"] },
-      { name: "Technology Help Desk", role: "Help Desk", extension: "4612", department: "Technology", room: "", keywords: ["technology","tech","help desk","it","computer"] },
       { name: "Elissa Gonzalez", role: "Tech TOSA", extension: "5696", department: "Technology", room: "", keywords: ["gonzalez","elissa","technology","tech tosa","tosa"] },
-      { name: "Technology Emergency", role: "Technology", extension: "5708", department: "Technology", room: "", keywords: ["technology emergency","tech emergency","technology"] },
       { name: "Student Store", role: "Student Store", extension: "5104", department: "Student Store", room: "", keywords: ["student store","store"] },
       { name: "Lisa Walters", role: "Activities", extension: "5508", department: "Activities", room: "", keywords: ["walters","lisa","activities","activities director"] },
       { name: "Mike Bloodworth", role: "Athletics", extension: "5750", department: "Athletics", room: "", keywords: ["bloodworth","mike","athletics","athletic director"] },
