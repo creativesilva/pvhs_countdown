@@ -10,15 +10,14 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="PVHS Countdown Clock">
   <meta name="theme-color" content="#007474">
-  <link rel="apple-touch-icon" href="PV_Logo.png?v=8">
-  <link rel="icon" type="image/png" sizes="192x192" href="PV_Logo.png?v=8">
-  <link rel="icon" type="image/png" sizes="512x512" href="PV_Logo.png?v=8">
-  <link rel="shortcut icon" href="PV_Logo.png?v=8">
+  <link rel="apple-touch-icon" href="PV_Logo.png?v=9">
+  <link rel="icon" type="image/png" sizes="192x192" href="PV_Logo.png?v=9">
+  <link rel="icon" type="image/png" sizes="512x512" href="PV_Logo.png?v=9">
+  <link rel="shortcut icon" href="PV_Logo.png?v=9">
   <title>PVHS Countdown Clock</title>
   <style>
     :root {
       --teal: #007474;
-      --teal-dark: #003c3c;
       --white: #f7fbfb;
       --muted: #cfe3e3;
       --panel: rgba(255,255,255,0.08);
@@ -94,7 +93,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 165%;
+      width: 140%;
       max-width: none;
       transform: translate(-50%, -50%);
       opacity: 0.075;
@@ -126,8 +125,8 @@
       text-transform: uppercase;
     }
 
-    .school-card,
-    .period-card {
+    .period-card,
+    .school-card {
       width: 100%;
       border-radius: 28px;
       background: var(--panel);
@@ -137,54 +136,17 @@
       -webkit-backdrop-filter: blur(4px);
     }
 
-    .school-card {
-      padding: 18px 16px 16px 16px;
-    }
-
-    .school-label {
-      font-size: clamp(16px, 2.2vw, 24px);
-      line-height: 1.05;
-      font-weight: 900;
-      color: #ffffff;
-      text-transform: uppercase;
-      letter-spacing: 0.7px;
-      margin-bottom: 8px;
-    }
-
-    .school-number {
-      font-size: clamp(78px, 14vw, 148px);
-      line-height: 0.9;
-      font-weight: 900;
-      letter-spacing: -4px;
-      margin: 0;
-      background: var(--white-gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      text-shadow: 0 6px 18px rgba(0,0,0,0.18);
-    }
-
-    .detail-row {
-      font-size: clamp(13px, 1.7vw, 18px);
-      line-height: 1.35;
-      color: #d9f2f2;
-      margin: 0;
-      font-weight: 800;
-    }
-
-    .detail-row strong {
-      color: #ffffff;
-    }
-
     .period-card {
-      flex: 1 1 auto;
-      min-height: 0;
       padding: 18px 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
+    }
+
+    .school-card {
+      padding: 18px 16px 16px 16px;
     }
 
     .block-label {
@@ -229,6 +191,8 @@
       color: var(--muted);
       text-transform: uppercase;
       margin: 0;
+      max-width: 100%;
+      text-wrap: balance;
     }
 
     .status-stack {
@@ -236,7 +200,7 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
-      margin-top: 4px;
+      margin-top: 2px;
     }
 
     .status-row {
@@ -246,6 +210,41 @@
       color: #d9f2f2;
       text-transform: uppercase;
       margin: 0;
+    }
+
+    .school-label {
+      font-size: clamp(16px, 2.2vw, 24px);
+      line-height: 1.05;
+      font-weight: 900;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      margin-bottom: 8px;
+    }
+
+    .school-number {
+      font-size: clamp(78px, 14vw, 148px);
+      line-height: 0.9;
+      font-weight: 900;
+      letter-spacing: -4px;
+      margin: 0;
+      background: var(--white-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    }
+
+    .detail-row {
+      font-size: clamp(13px, 1.7vw, 18px);
+      line-height: 1.35;
+      color: #d9f2f2;
+      margin: 0;
+      font-weight: 800;
+    }
+
+    .detail-row strong {
+      color: #ffffff;
     }
 
     .footer-note {
@@ -266,26 +265,21 @@
       }
 
       .ghost-logo {
-        width: 185%;
+        width: 158%;
       }
 
-      .school-card,
-      .period-card {
+      .period-card,
+      .school-card {
         border-radius: 24px;
       }
 
+      .period-card,
       .school-card {
-        padding: 16px 12px 14px 12px;
+        padding-left: 12px;
+        padding-right: 12px;
       }
 
-      .period-card {
-        padding: 16px 12px;
-      }
-
-      .school-number {
-        letter-spacing: -3px;
-      }
-
+      .school-number,
       .timer {
         letter-spacing: -3px;
       }
@@ -303,17 +297,6 @@
       <div class="content">
         <p class="eyebrow">PVHS Countdown Clock</p>
 
-        <div class="school-card">
-          <div class="school-label">School Days Left</div>
-          <div class="school-number" id="daysLeft">--</div>
-          <p class="detail-row">
-            <strong id="todayLabel">Today:</strong> <span id="todayText">--</span>
-          </p>
-          <p class="detail-row">
-            <strong>Last Day:</strong> June 10, 2026
-          </p>
-        </div>
-
         <div class="period-card">
           <div class="block-label" id="blockLabel">Loading</div>
           <div class="timer normal" id="timerText">--:--</div>
@@ -323,6 +306,17 @@
             <p class="status-row" id="scheduleText">Schedule: --</p>
             <p class="status-row" id="timeText">Time: --</p>
           </div>
+        </div>
+
+        <div class="school-card">
+          <div class="school-label">School Days Left</div>
+          <div class="school-number" id="daysLeft">--</div>
+          <p class="detail-row">
+            <strong id="todayLabel">Today:</strong> <span id="todayText">--</span>
+          </p>
+          <p class="detail-row">
+            <strong>Last Day:</strong> June 10, 2026
+          </p>
         </div>
 
         <div class="footer-note">Created By: Mr. Silva</div>
@@ -505,18 +499,6 @@
       return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
     }
 
-    function formatLongDate(dateString) {
-      const [year, month, day] = dateString.split("-").map(Number);
-      const date = new Date(year, month - 1, day);
-      return new Intl.DateTimeFormat("en-US", {
-        timeZone,
-        weekday: "long",
-        month: "long",
-        day: "numeric",
-        year: "numeric"
-      }).format(date);
-    }
-
     function getTodayLabel(dateString) {
       if (finalsDays.has(dateString)) {
         return "Today (Finals):";
@@ -584,8 +566,10 @@
       const currentAbsoluteSeconds = (california.minutesNow * 60) + california.secondsNow;
       const blocks = todaySchedule.blocks;
       let activeBlock = null;
+      let activeIndex = -1;
 
-      for (const block of blocks) {
+      for (let i = 0; i < blocks.length; i++) {
+        const block = blocks[i];
         const startSeconds = parseTimeString(block.start) * 60;
         const endSeconds = parseTimeString(block.end) * 60;
 
@@ -595,6 +579,7 @@
             startSeconds,
             endSeconds
           };
+          activeIndex = i;
           break;
         }
       }
@@ -604,15 +589,15 @@
         const lastBlockEnd = parseTimeString(blocks[blocks.length - 1].end) * 60;
 
         if (currentAbsoluteSeconds < firstBlockStart) {
-          blockLabel.textContent = "SCHOOL STARTS SOON";
+          blockLabel.textContent = "School Starts Soon";
           timerText.textContent = formatRemaining(firstBlockStart - currentAbsoluteSeconds);
           timerText.className = "timer normal";
-          subText.textContent = "Countdown to the first bell";
+          subText.textContent = "Time remaining until 1st Period";
           return;
         }
 
         if (currentAbsoluteSeconds >= lastBlockEnd) {
-          blockLabel.textContent = "SCHOOL IS OUT";
+          blockLabel.textContent = "School Is Out";
           timerText.textContent = "00:00";
           timerText.className = "timer normal";
           subText.textContent = "Have a great day";
@@ -622,11 +607,17 @@
 
       const remainingSeconds = activeBlock.endSeconds - currentAbsoluteSeconds;
       const warning = remainingSeconds <= 300;
+      const nextBlock = blocks[activeIndex + 1];
 
       blockLabel.textContent = activeBlock.label;
       timerText.textContent = formatRemaining(remainingSeconds);
       timerText.className = warning ? "timer warning" : "timer normal";
-      subText.textContent = "Time remaining";
+
+      if (nextBlock) {
+        subText.textContent = `Time remaining until ${nextBlock.label}`;
+      } else {
+        subText.textContent = "Time remaining until school is out";
+      }
     }
 
     function updateApp() {
