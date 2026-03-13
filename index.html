@@ -10,10 +10,10 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="PVHS Countdown">
   <meta name="theme-color" content="#007474">
-  <link rel="apple-touch-icon" href="PV_Logo.png?v=1">
-  <link rel="icon" type="image/png" sizes="192x192" href="PV_Logo.png?v=1">
-  <link rel="icon" type="image/png" sizes="512x512" href="PV_Logo.png?v=1">
-  <link rel="shortcut icon" href="PV_Logo.png?v=1">
+  <link rel="apple-touch-icon" href="PV_Logo.png?v=2">
+  <link rel="icon" type="image/png" sizes="192x192" href="PV_Logo.png?v=2">
+  <link rel="icon" type="image/png" sizes="512x512" href="PV_Logo.png?v=2">
+  <link rel="shortcut icon" href="PV_Logo.png?v=2">
   <title>PVHS School Days Countdown</title>
   <style>
     :root {
@@ -22,7 +22,7 @@
       --teal-soft: #0a9a9a;
       --black: #0b0f10;
       --white: #f7fbfb;
-      --muted: #b9d3d3;
+      --muted: #cfe3e3;
       --shadow: 0 20px 46px rgba(0,0,0,0.28);
       --soft-shadow: 0 12px 24px rgba(0,0,0,0.20);
     }
@@ -58,9 +58,8 @@
     }
 
     .app {
-      width: min(100%, 430px);
-      min-height: min(86vh, 820px);
-      min-height: min(86dvh, 820px);
+      width: min(100%, 760px);
+      aspect-ratio: 1 / 1;
       border-radius: 32px;
       overflow: hidden;
       position: relative;
@@ -71,7 +70,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 30px 24px;
+      padding: 34px 28px;
       text-align: center;
     }
 
@@ -89,18 +88,19 @@
       position: relative;
       z-index: 1;
       width: 100%;
+      max-width: 560px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
     .logo {
-      width: min(42vw, 142px);
-      max-width: 142px;
+      width: min(18vw, 120px);
+      max-width: 120px;
       height: auto;
       object-fit: contain;
       filter: drop-shadow(0 10px 22px rgba(0,0,0,0.28));
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .eyebrow {
@@ -113,25 +113,16 @@
     }
 
     .title {
-      font-size: clamp(34px, 8vw, 52px);
-      line-height: 0.98;
+      font-size: clamp(42px, 7vw, 74px);
+      line-height: 0.96;
       font-weight: 900;
-      letter-spacing: -0.8px;
-      margin: 0 0 10px 0;
-    }
-
-    .subtitle {
-      font-size: clamp(17px, 4.5vw, 22px);
-      line-height: 1.25;
-      font-weight: 700;
-      color: var(--muted);
-      margin: 0 0 22px 0;
-      max-width: 320px;
+      letter-spacing: -1px;
+      margin: 0 0 18px 0;
     }
 
     .count-card {
       width: 100%;
-      max-width: 300px;
+      max-width: 320px;
       border-radius: 28px;
       padding: 22px 18px;
       background: rgba(255,255,255,0.08);
@@ -139,7 +130,7 @@
       box-shadow: var(--soft-shadow);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
-      margin-bottom: 18px;
+      margin-bottom: 22px;
     }
 
     .count-label {
@@ -152,7 +143,7 @@
     }
 
     .count-number {
-      font-size: clamp(76px, 22vw, 118px);
+      font-size: clamp(88px, 16vw, 130px);
       line-height: 0.95;
       font-weight: 900;
       letter-spacing: -2px;
@@ -161,11 +152,11 @@
     }
 
     .detail {
-      font-size: 16px;
-      line-height: 1.4;
+      font-size: clamp(19px, 2.8vw, 22px);
+      line-height: 1.45;
       color: #d9f2f2;
-      margin: 6px 0;
-      max-width: 320px;
+      margin: 5px 0;
+      max-width: 420px;
     }
 
     .detail strong {
@@ -174,10 +165,50 @@
 
     .footer-note {
       margin-top: 18px;
-      font-size: 13px;
+      font-size: 16px;
       line-height: 1.35;
       color: #b5d4d4;
-      max-width: 310px;
+      max-width: 320px;
+    }
+
+    @media (max-width: 700px) {
+      .app {
+        width: min(100%, 430px);
+        aspect-ratio: auto;
+        min-height: min(86vh, 820px);
+        min-height: min(86dvh, 820px);
+        padding: 30px 24px;
+      }
+
+      .content {
+        max-width: 100%;
+      }
+
+      .logo {
+        width: min(42vw, 142px);
+        max-width: 142px;
+      }
+
+      .title {
+        font-size: clamp(34px, 8vw, 52px);
+        line-height: 0.98;
+      }
+
+      .count-card {
+        max-width: 300px;
+      }
+
+      .count-number {
+        font-size: clamp(76px, 22vw, 118px);
+      }
+
+      .detail {
+        font-size: 16px;
+      }
+
+      .footer-note {
+        font-size: 14px;
+      }
     }
 
     @media (max-width: 390px) {
@@ -202,7 +233,6 @@
       <img src="PV_Logo.png" alt="Pioneer Valley High School logo" class="logo">
       <div class="eyebrow">Pioneer Valley High School</div>
       <h1 class="title">School Days<br>Countdown</h1>
-      <p class="subtitle">A live countdown of student school days remaining this year.</p>
 
       <div class="count-card">
         <div class="count-label">School Days Left</div>
@@ -211,10 +241,9 @@
 
       <p class="detail"><strong>Today:</strong> <span id="todayText">--</span></p>
       <p class="detail"><strong>Last Student Day:</strong> June 10, 2026</p>
-      <p class="detail"><strong>Time Zone:</strong> California</p>
 
       <div class="footer-note">
-        This countdown updates using student attendance days only and skips weekends, holidays, breaks, and non-student days.
+        Designed by: Mr. Silva
       </div>
     </div>
   </div>
