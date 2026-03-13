@@ -10,16 +10,15 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="PVHS Tools">
   <meta name="theme-color" content="#007474">
-  <link rel="apple-touch-icon" href="PV_Logo.png?v=15">
-  <link rel="icon" type="image/png" sizes="192x192" href="PV_Logo.png?v=15">
-  <link rel="icon" type="image/png" sizes="512x512" href="PV_Logo.png?v=15">
-  <link rel="shortcut icon" href="PV_Logo.png?v=15">
+  <link rel="apple-touch-icon" href="PV_Logo.png?v=16">
+  <link rel="icon" type="image/png" sizes="192x192" href="PV_Logo.png?v=16">
+  <link rel="icon" type="image/png" sizes="512x512" href="PV_Logo.png?v=16">
+  <link rel="shortcut icon" href="PV_Logo.png?v=16">
   <title>PVHS Tools</title>
 
   <style>
     :root {
       --teal: #007474;
-      --teal-dark: #003c3c;
       --white: #f7fbfb;
       --muted: #cfe3e3;
       --panel: rgba(255,255,255,0.08);
@@ -38,11 +37,9 @@
     body {
       width: 100%;
       height: 100%;
-      min-height: 100%;
       margin: 0;
       padding: 0;
-      overflow-x: hidden;
-      overflow-y: auto;
+      overflow: hidden;
       background: #021414;
     }
 
@@ -54,22 +51,21 @@
 
     .frame {
       width: 100%;
-      min-height: 100vh;
-      min-height: 100dvh;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       padding:
-        max(14px, env(safe-area-inset-top))
-        16px
-        max(14px, env(safe-area-inset-bottom))
-        16px;
+        max(12px, env(safe-area-inset-top))
+        12px
+        max(12px, env(safe-area-inset-bottom))
+        12px;
     }
 
     .app {
       width: min(100%, 430px);
-      min-height: min(92vh, 900px);
-      min-height: min(92dvh, 900px);
+      aspect-ratio: 430 / 880;
+      max-height: calc(100dvh - 24px);
       border-radius: 34px;
       overflow: hidden;
       position: relative;
@@ -79,7 +75,7 @@
         radial-gradient(circle at center, rgba(10,34,34,0.94) 0%, rgba(4,20,20,0.98) 46%, rgba(0,116,116,1) 100%);
       display: flex;
       justify-content: center;
-      padding: 22px 18px 18px 18px;
+      padding: 18px 18px 16px 18px;
       text-align: center;
       isolation: isolate;
     }
@@ -97,9 +93,9 @@
 
     .ghost-logo {
       position: absolute;
-      top: 54%;
+      top: 56%;
       left: 50%;
-      width: clamp(155%, 180vw, 205%);
+      width: 182%;
       max-width: none;
       transform: translate(-50%, -50%);
       opacity: 0.07;
@@ -117,7 +113,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
+      min-height: 100%;
     }
 
     .top-actions {
@@ -125,14 +122,15 @@
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      min-height: 38px;
+      min-height: 34px;
+      margin-bottom: 2px;
     }
 
     .popout-btn {
       appearance: none;
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 14px;
-      padding: 10px 12px;
+      padding: 9px 11px;
       background: rgba(255,255,255,0.08);
       color: #ffffff;
       font-size: 11px;
@@ -155,13 +153,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
-      padding-top: 2px;
+      gap: 8px;
     }
 
     .logo-clear {
-      width: 92px;
-      max-width: 92px;
+      width: 86px;
+      max-width: 86px;
       height: auto;
       object-fit: contain;
       filter: drop-shadow(0 8px 18px rgba(0,0,0,0.24));
@@ -169,7 +166,7 @@
 
     .eyebrow {
       margin: 0;
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.1;
       font-weight: 900;
       letter-spacing: 0.8px;
@@ -179,7 +176,7 @@
 
     .title {
       margin: 0;
-      font-size: clamp(38px, 11vw, 60px);
+      font-size: clamp(34px, 10vw, 56px);
       line-height: 0.95;
       font-weight: 900;
       letter-spacing: -1px;
@@ -189,8 +186,8 @@
 
     .subtitle {
       margin: 0;
-      max-width: 300px;
-      font-size: 16px;
+      max-width: 290px;
+      font-size: 15px;
       line-height: 1.35;
       font-weight: 700;
       color: var(--muted);
@@ -201,8 +198,8 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      margin-top: 6px;
+      gap: 12px;
+      margin-top: 4px;
     }
 
     .launch-card {
@@ -215,7 +212,7 @@
       -webkit-backdrop-filter: blur(4px);
       text-decoration: none;
       color: var(--white);
-      padding: 18px 16px;
+      padding: 16px 16px;
       transition: background 0.18s ease, transform 0.12s ease, border-color 0.18s ease;
       display: block;
     }
@@ -231,7 +228,7 @@
 
     .launch-label {
       margin: 0 0 8px 0;
-      font-size: clamp(26px, 7vw, 38px);
+      font-size: clamp(24px, 6.8vw, 36px);
       line-height: 0.95;
       font-weight: 900;
       text-transform: uppercase;
@@ -240,7 +237,7 @@
 
     .launch-desc {
       margin: 0;
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.35;
       font-weight: 700;
       color: var(--muted);
@@ -249,8 +246,8 @@
 
     .footer-note {
       margin-top: auto;
-      padding-top: 10px;
-      font-size: 11px;
+      padding-top: 8px;
+      font-size: 10px;
       line-height: 1.3;
       color: #b5d4d4;
       text-transform: uppercase;
@@ -265,34 +262,48 @@
     }
 
     @media (max-width: 430px) {
-      .app {
+      html,
+      body {
+        overflow-y: auto;
+      }
+
+      .frame {
         min-height: 100vh;
         min-height: 100dvh;
+        height: auto;
+        align-items: flex-start;
+      }
+
+      .app {
+        width: 100%;
+        max-height: none;
+        min-height: calc(100dvh - 24px);
+        aspect-ratio: auto;
         border-radius: 28px;
-        padding: 18px 14px 14px 14px;
+        padding: 16px 14px 14px 14px;
       }
 
       .logo-clear {
-        width: 82px;
-        max-width: 82px;
+        width: 78px;
+        max-width: 78px;
       }
 
       .subtitle {
-        max-width: 280px;
-        font-size: 15px;
+        max-width: 270px;
+        font-size: 14px;
       }
 
       .launch-card {
-        padding: 16px 14px;
+        padding: 15px 14px;
         border-radius: 24px;
       }
 
       .launch-desc {
-        font-size: 13px;
+        font-size: 12px;
       }
 
       .footer-note {
-        font-size: 10px;
+        font-size: 9px;
       }
     }
   </style>
@@ -335,8 +346,8 @@
     const popoutBtn = document.getElementById("popoutBtn");
 
     function openPopoutWindow() {
-      const width = 430;
-      const height = 880;
+      const width = 460;
+      const height = 980;
       const left = Math.max(0, Math.round((window.screen.width - width) / 2));
       const top = Math.max(0, Math.round((window.screen.height - height) / 2));
 
@@ -349,7 +360,7 @@
           `left=${left}`,
           `top=${top}`,
           "resizable=yes",
-          "scrollbars=yes",
+          "scrollbars=no",
           "toolbar=no",
           "menubar=no",
           "location=no",
