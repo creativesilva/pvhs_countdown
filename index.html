@@ -10,10 +10,10 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="PVHS Tools">
   <meta name="theme-color" content="#007474">
-  <link rel="apple-touch-icon" href="PV_Logo.png?v=16">
-  <link rel="icon" type="image/png" sizes="192x192" href="PV_Logo.png?v=16">
-  <link rel="icon" type="image/png" sizes="512x512" href="PV_Logo.png?v=16">
-  <link rel="shortcut icon" href="PV_Logo.png?v=16">
+  <link rel="apple-touch-icon" href="PV_Logo.png?v=22">
+  <link rel="icon" type="image/png" sizes="192x192" href="PV_Logo.png?v=22">
+  <link rel="icon" type="image/png" sizes="512x512" href="PV_Logo.png?v=22">
+  <link rel="shortcut icon" href="PV_Logo.png?v=22">
   <title>PVHS Tools</title>
 
   <style>
@@ -244,6 +244,69 @@
       text-transform: uppercase;
     }
 
+    .quick-links-wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    .quick-links-title {
+      margin: 0;
+      font-size: 11px;
+      line-height: 1.2;
+      font-weight: 900;
+      letter-spacing: 0.7px;
+      color: #dff7f7;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .quick-links-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .quick-link-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 58px;
+      padding: 12px 10px;
+      border-radius: 20px;
+      text-decoration: none;
+      color: #ffffff;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--soft-shadow);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      transition: background 0.18s ease, transform 0.12s ease, border-color 0.18s ease;
+      text-align: center;
+    }
+
+    .quick-link-btn:hover {
+      background: var(--card-hover);
+      border-color: rgba(255,255,255,0.18);
+    }
+
+    .quick-link-btn:active {
+      transform: scale(0.985);
+    }
+
+    .quick-link-label {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.2;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.35px;
+      text-wrap: balance;
+    }
+
     .footer-note {
       margin-top: auto;
       padding-top: 8px;
@@ -302,6 +365,20 @@
         font-size: 12px;
       }
 
+      .quick-links-grid {
+        gap: 8px;
+      }
+
+      .quick-link-btn {
+        min-height: 54px;
+        border-radius: 18px;
+        padding: 10px 8px;
+      }
+
+      .quick-link-label {
+        font-size: 11px;
+      }
+
       .footer-note {
         font-size: 9px;
       }
@@ -322,7 +399,7 @@
           <img src="PV_Logo.png" alt="Pioneer Valley High School logo" class="logo-clear">
           <p class="eyebrow">Official PVHS Tool</p>
           <h1 class="title">PVHS Tools</h1>
-          <p class="subtitle">Quick access to live campus countdowns and staff extension search.</p>
+          <p class="subtitle">Quick access to live campus countdowns, extension search, and teacher links.</p>
         </div>
 
         <div class="launcher-stack">
@@ -335,6 +412,48 @@
             <h2 class="launch-label">Extension Search</h2>
             <p class="launch-desc">Search names, departments, positions, rooms, and phone extensions.</p>
           </a>
+        </div>
+
+        <div class="quick-links-wrap">
+          <p class="quick-links-title">Quick Links</p>
+
+          <div class="quick-links-grid">
+            <a
+              class="quick-link-btn"
+              href="https://maintenance.facilitron.com/anonymous/SantaMariaJUHSD/newworkorder"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <p class="quick-link-label">Maintenance Work Orders</p>
+            </a>
+
+            <a
+              class="quick-link-btn"
+              href="https://smjuhsd.incidentiq.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <p class="quick-link-label">IT Work Orders</p>
+            </a>
+
+            <a
+              class="quick-link-btn"
+              href="https://login.frontlineeducation.com/login?signin=b3c0ce2383586187edfa948e954b74ce&clientId=superSuit#/login"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <p class="quick-link-label">Absence Requests</p>
+            </a>
+
+            <a
+              class="quick-link-btn"
+              href="https://smjuhsd-my.sharepoint.com/:x:/g/personal/etorres_smjuhsd_org/IQBiSObgdkR3R68_dXHYrDwfAbA5RpN-scClTiKQddgcsLU?rtime=Q2eJ9lSB3kg"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <p class="quick-link-label">In Lieu Spread Sheet</p>
+            </a>
+          </div>
         </div>
 
         <div class="footer-note">Created By: Mr. Silva</div>
