@@ -10,10 +10,10 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="PVHS Extension Search">
   <meta name="theme-color" content="#007474">
-  <link rel="apple-touch-icon" href="PV_Logo.png?v=20">
-  <link rel="icon" type="image/png" sizes="192x192" href="PV_Logo.png?v=20">
-  <link rel="icon" type="image/png" sizes="512x512" href="PV_Logo.png?v=20">
-  <link rel="shortcut icon" href="PV_Logo.png?v=20">
+  <link rel="apple-touch-icon" href="PV_Logo.png?v=21">
+  <link rel="icon" type="image/png" sizes="192x192" href="PV_Logo.png?v=21">
+  <link rel="icon" type="image/png" sizes="512x512" href="PV_Logo.png?v=21">
+  <link rel="shortcut icon" href="PV_Logo.png?v=21">
   <title>PVHS Extension Search</title>
 
   <style>
@@ -426,6 +426,16 @@
     const extensionSearch = [
       { name: "Chris Silva", role: "VPA", extension: "5322", department: "VPA", room: "322", keywords: ["silva","chris","vpa","room 322","322","teacher","photography"] },
       { name: "Laura Garcia Solorio", role: "VPA", extension: "5322", department: "VPA", room: "322", keywords: ["laura","garcia","solorio","garcia solorio","vpa","room 322","322","teacher"] },
+
+      { name: "PVHS Emergency Line", role: "Emergency", extension: "5000", department: "", room: "", keywords: ["emergency","pvhs emergency line","5000","urgent"] },
+      { name: "PVHS Maintenance", role: "Emergency", extension: "878-8155", department: "", room: "", keywords: ["maintenance","pvhs maintenance","878-8155","urgent"] },
+      { name: "Police/Fire Emergency", role: "Emergency", extension: "911", department: "", room: "", keywords: ["police","fire","911","emergency","urgent"] },
+      { name: "SM Police Dept", role: "Emergency", extension: "928-3781", department: "", room: "", keywords: ["sm police dept","police","928-3781","emergency","urgent"] },
+      { name: "SMPD & Fire Dispatch", role: "Emergency", extension: "925-2631", department: "", room: "", keywords: ["dispatch","fire dispatch","smpd","925-2631","emergency","urgent"] },
+
+      { name: "Karine Perez", role: "Admin Assistant", extension: "5123", department: "Administration", room: "", keywords: ["perez","karine","admin assistant","administration","emergency"] },
+      { name: "Eddie Hernandez", role: "Security", extension: "5773", department: "Security", room: "", keywords: ["eddie","hernandez","security","front desk","5773","emergency"] },
+
       { name: "Dr. Paul Robinson", role: "Principal", extension: "5701", department: "Administration", room: "", keywords: ["robinson","paul","dr robinson","principal","administration"] },
       { name: "Araceli Mandujano", role: "Admin Assistant", extension: "5702", department: "Administration", room: "", keywords: ["mandujano","araceli","admin assistant","administration"] },
       { name: "Kevin Ilac", role: "Asst Principal", extension: "5703", department: "Administration", room: "", keywords: ["ilac","kevin","assistant principal","asst principal","administration"] },
@@ -435,99 +445,31 @@
       { name: "Jeff Hromadka", role: "Asst Principal", extension: "5709", department: "Administration", room: "", keywords: ["hromadka","jeff","assistant principal","asst principal","administration"] },
       { name: "Fabi Etheridge", role: "Admin Assistant", extension: "5710", department: "Administration", room: "", keywords: ["etheridge","fabi","admin assistant","administration"] },
       { name: "Christian Basulto", role: "Dean", extension: "5122", department: "Administration", room: "", keywords: ["basulto","christian","dean","administration"] },
-      { name: "Karine Perez", role: "Admin Assistant", extension: "5123", department: "Administration", room: "", keywords: ["perez","karine","admin assistant","administration","emergency"] },
-
-      { name: "Receptionist", role: "Front Office", extension: "5770", department: "Administration", room: "", keywords: ["receptionist","front office","office","emergency"] },
-      { name: "Attendance Office", role: "Attendance", extension: "5105 / 5107", department: "Attendance", room: "", keywords: ["attendance","attendance office","office","emergency"] },
-      { name: "Technology Help Desk", role: "Help Desk", extension: "4612", department: "Technology", room: "", keywords: ["technology","tech","help desk","it","computer","emergency"] },
-      { name: "Technology Emergency", role: "Technology", extension: "5708", department: "Technology", room: "", keywords: ["technology emergency","tech emergency","technology","emergency"] },
-
-      { name: "Security", role: "Security", extension: "", department: "", room: "", keywords: ["security","campus security","emergency"] },
-
+      { name: "Receptionist", role: "Front Office", extension: "5770", department: "Administration", room: "", keywords: ["receptionist","front office","office"] },
+      { name: "Attendance Office", role: "Attendance", extension: "5105 / 5107", department: "Attendance", room: "", keywords: ["attendance","attendance office","office"] },
       { name: "Araceli Castro", role: "Attendance", extension: "5105", department: "Attendance", room: "", keywords: ["castro","araceli","attendance"] },
       { name: "Laura Mariscal Mendez", role: "Attendance Assistant", extension: "5107", department: "Attendance", room: "", keywords: ["mariscal","mendez","laura","attendance assistant","attendance"] },
       { name: "Registrar", role: "Records Office", extension: "5764", department: "Records", room: "", keywords: ["registrar","records","records office"] },
+      { name: "Technology Help Desk", role: "Help Desk", extension: "4612", department: "Technology", room: "", keywords: ["technology","tech","help desk","it","computer"] },
+      { name: "Technology Emergency", role: "Technology", extension: "5708", department: "Technology", room: "", keywords: ["technology emergency","tech emergency","technology"] },
       { name: "Elissa Gonzalez", role: "Tech TOSA", extension: "5696", department: "Technology", room: "", keywords: ["gonzalez","elissa","technology","tech tosa","tosa"] },
-      { name: "Student Store", role: "Student Store", extension: "5104", department: "Student Store", room: "", keywords: ["student store","store"] },
-      { name: "Lisa Walters", role: "Activities", extension: "5508", department: "Activities", room: "", keywords: ["walters","lisa","activities","activities director"] },
-      { name: "Mike Bloodworth", role: "Athletics", extension: "5750", department: "Athletics", room: "", keywords: ["bloodworth","mike","athletics","athletic director"] },
-      { name: "Flor Avila-Suarez", role: "Community Liaison", extension: "5711", department: "Support Services", room: "", keywords: ["avila-suarez","flor","community liaison","liaison"] },
-      { name: "Sergio Orozco", role: "Psychologist", extension: "5705", department: "Psychologists", room: "", keywords: ["orozco","sergio","psychologist","psych"] },
-      { name: "Serina Rodriguez", role: "Psychologist", extension: "5757", department: "Psychologists", room: "", keywords: ["rodriguez","serina","psychologist","psych"] },
-      { name: "Erica Tajon", role: "Psychologist", extension: "5712", department: "Psychologists", room: "", keywords: ["tajon","erica","psychologist","psych"] },
-      { name: "Juan Antonio-Martinez", role: "EAOP Counselor", extension: "5692", department: "Counseling", room: "", keywords: ["antonio-martinez","juan","eaop","counselor","career center"] },
-      { name: "Susan Avrit", role: "Counselor", extension: "5775", department: "Counseling", room: "", keywords: ["avrit","susan","counselor","counseling"] },
-      { name: "Crystal Buchan", role: "Counselor", extension: "5601", department: "Counseling", room: "", keywords: ["buchan","crystal","counselor","counseling"] },
-      { name: "Chris Carrillo", role: "Counselor", extension: "5198", department: "Counseling", room: "", keywords: ["carrillo","chris","christopher","counselor","counseling"] },
-      { name: "Miriana Del Toro", role: "Counselor", extension: "5754", department: "Counseling", room: "", keywords: ["del toro","miriana","counselor","counseling"] },
-      { name: "Heydi Elenes", role: "Counselor", extension: "5768", department: "Counseling", room: "", keywords: ["elenes","heydi","counselor","counseling"] },
-      { name: "Israel Hernandez", role: "Counselor", extension: "5111", department: "Counseling", room: "", keywords: ["hernandez","israel","counselor","counseling"] },
-      { name: "Rebecca Leadbetter", role: "Counselor", extension: "5766", department: "Counseling", room: "", keywords: ["leadbetter","rebecca","counselor","counseling"] },
-      { name: "Nadia Mancha", role: "Counselor", extension: "5767", department: "Counseling", room: "", keywords: ["mancha","nadia","ventura","counselor","counseling"] },
-      { name: "Rocio Trujillo", role: "Counselor", extension: "5763", department: "Counseling", room: "", keywords: ["trujillo","rocio","counselor","counseling"] },
-      { name: "Gabriela Bardawil", role: "Guidance Technician", extension: "5118", department: "Counseling", room: "", keywords: ["bardawil","gabriela","guidance","guidance tech","counseling"] },
-      { name: "Robin Rocco", role: "Guidance Secretary", extension: "5771", department: "Counseling", room: "", keywords: ["rocco","robin","guidance secretary","guidance","counseling"] },
-      { name: "Marina Rodriguez-Vargas", role: "Guidance Technician", extension: "5117", department: "Counseling", room: "", keywords: ["rodriguez","vargas","marina","guidance","guidance tech","counseling"] },
-      { name: "Melissa Diaz", role: "FCS", extension: "5314", department: "FCS", room: "", keywords: ["diaz","melissa","fcs","family consumer science"] },
-      { name: "Kelsey Erbstoesser", role: "FCS", extension: "5313", department: "FCS", room: "", keywords: ["erbstoesser","kelsey","fcs","family consumer science"] },
-      { name: "Hector Guerra", role: "Agriculture", extension: "5207", department: "Agriculture", room: "", keywords: ["guerra","hector","agriculture","ag"] },
-      { name: "Marcie Guerra", role: "Agriculture", extension: "5212", department: "Agriculture", room: "", keywords: ["guerra","marcie","agriculture","ag"] },
-      { name: "Natalie Baldwin", role: "Ag", extension: "5206", department: "Agriculture", room: "", keywords: ["baldwin","natalie","agriculture","ag"] },
-      { name: "Brooke Phillips", role: "Agriculture", extension: "5334", department: "Agriculture", room: "", keywords: ["phillips","brooke","agriculture","ag"] },
-      { name: "Gabriel Ponce", role: "Agriculture", extension: "5208", department: "Agriculture", room: "", keywords: ["ponce","gabriel","agriculture","ag"] },
-      { name: "Tyler Dickinson", role: "Ag", extension: "5311", department: "Agriculture", room: "", keywords: ["dickinson","tyler","agriculture","ag"] },
-      { name: "Erin Nelson", role: "Business", extension: "5435", department: "Business", room: "", keywords: ["nelson","erin","business"] },
-      { name: "Erika Quintana", role: "Business", extension: "5335", department: "Business", room: "", keywords: ["quintana","erika","business"] },
-      { name: "Michelle Allen", role: "Science", extension: "5414", department: "Science", room: "", keywords: ["allen","michelle","science"] },
-      { name: "Arturo Avila-Meza", role: "Science", extension: "5413", department: "Science", room: "", keywords: ["avila-meza","arturo","science"] },
-      { name: "Laura Baines", role: "Science", extension: "5425", department: "Science", room: "", keywords: ["baines","laura","science"] },
-      { name: "Alexis Black-Gotham", role: "Science", extension: "5424", department: "Science", room: "", keywords: ["black-gotham","alexis","science"] },
-      { name: "Sierra Carlberg", role: "Science", extension: "5422", department: "Science", room: "", keywords: ["carlberg","sierra","science"] },
-      { name: "Riccardo Magni", role: "Science", extension: "5411", department: "Science", room: "", keywords: ["magni","riccardo","science"] },
-      { name: "Martinez, Megan", role: "Science / CTE", extension: "5423", department: "Science", room: "", keywords: ["martinez","megan","science","cte"] },
-      { name: "Nikki Knowlson", role: "Science", extension: "5421", department: "Science", room: "", keywords: ["knowlson","nikki","science"] },
-      { name: "Madelyn Schenk", role: "Science", extension: "5402", department: "Science", room: "", keywords: ["schenk","madelyn","science"] },
-      { name: "Nicole Shedd", role: "Science", extension: "5403", department: "Science", room: "", keywords: ["shedd","nicole","science"] },
-      { name: "Brooke Baarstad", role: "Math", extension: "5209", department: "Math", room: "", keywords: ["baarstad","brooke","math"] },
-      { name: "Prubjeet Bajwa", role: "Math", extension: "5618", department: "Math", room: "", keywords: ["bajwa","prubjeet","math"] },
-      { name: "Elvira Camacho", role: "Math", extension: "5453", department: "Math", room: "", keywords: ["camacho","elvira","math"] },
-      { name: "Andy Curtis", role: "Math", extension: "5210", department: "Math", room: "", keywords: ["curtis","andy","math"] },
-      { name: "Hedy Eachus", role: "Math", extension: "5461", department: "Math", room: "", keywords: ["eachus","hedy","math"] },
-      { name: "Neil Eckardt", role: "Math", extension: "5609", department: "Math", room: "", keywords: ["eckardt","neil","math"] },
-      { name: "Laurie Geronimo", role: "Math", extension: "5627", department: "Math", room: "", keywords: ["geronimo","laurie","math"] },
-      { name: "Rogelio Ordonez Aguilar", role: "Math", extension: "5466", department: "Math", room: "", keywords: ["ordonez","aguilar","rogelio","math"] },
-      { name: "Denise Ortiz", role: "Math", extension: "5451", department: "Math", room: "", keywords: ["ortiz","denise","math"] },
-      { name: "Patty Peinado", role: "Math", extension: "5626", department: "Math", room: "", keywords: ["peinado","patty","math"] },
-      { name: "Jennifer Rios", role: "Math", extension: "5462", department: "Math", room: "", keywords: ["rios","jennifer","math"] },
-      { name: "Brooke Bloodworth", role: "Athletics", extension: "5750", department: "Athletics", room: "", keywords: ["athletics","athletic director","bloodworth"] },
-      { name: "Jim Doyle", role: "Physical Ed", extension: "5514", department: "PE", room: "", keywords: ["doyle","jim","pe","physical ed"] },
-      { name: "Sally Hemesath", role: "Physical Ed", extension: "5576", department: "PE", room: "", keywords: ["hemesath","sally","pe","physical ed"] },
-      { name: "Dustin Davis", role: "Physical Education", extension: "5513", department: "PE", room: "", keywords: ["davis","dustin","pe","physical education"] },
-      { name: "Macias, Aundrea", role: "Physical Ed", extension: "5515", department: "PE", room: "", keywords: ["macias","aundrea","pe","physical ed"] },
-      { name: "Rothford, J Ryan", role: "PE", extension: "5516", department: "PE", room: "", keywords: ["rothford","ryan","j ryan","pe"] },
-      { name: "Hallie Smith", role: "PE and ROP", extension: "5517 / 5551", department: "PE", room: "", keywords: ["smith","hallie","pe","rop"] },
-      { name: "Stephanie Fikri", role: "VPA", extension: "5312", department: "VPA", room: "", keywords: ["fikri","stephanie","vpa"] },
-      { name: "Lisbet Barriga Chavez", role: "VPA", extension: "5203", department: "VPA", room: "", keywords: ["barriga","chavez","lisbet","vpa"] },
-      { name: "Selyn Harwin", role: "VPA", extension: "5202", department: "VPA", room: "", keywords: ["harwin","selyn","vpa"] },
-      { name: "Richard Hernandez", role: "VPA Choir", extension: "5201", department: "VPA", room: "", keywords: ["hernandez","richard","choir","vpa"] },
-      { name: "Mankin, Rileigh", role: "VPA", extension: "5331", department: "VPA", room: "", keywords: ["mankin","rileigh","vpa"] },
-      { name: "Christine Linne", role: "Industrial Tech", extension: "5204", department: "Industrial Tech", room: "", keywords: ["linne","christine","industrial tech","ind tech"] },
-      { name: "Scott Wonnell", role: "Industrial Tech", extension: "5205", department: "Industrial Tech", room: "", keywords: ["wonnell","scott","industrial tech","ind tech"] },
-      { name: "Patrick Brickey", role: "Independent Study", extension: "5126", department: "Independent Study", room: "", keywords: ["brickey","patrick","independent study","ind study"] },
-      { name: "Lynette Wyller", role: "Independent Study", extension: "5227", department: "Independent Study", room: "", keywords: ["wyller","lynette","independent study","ind study"] },
-      { name: "Melticia Brown", role: "Xerox", extension: "5112", department: "Office Support", room: "", keywords: ["brown","melticia","xerox"] },
-      { name: "Lisa Bisquera", role: "Textbooks", extension: "5106", department: "Textbooks", room: "", keywords: ["bisquera","lisa","textbooks"] },
-      { name: "Ting, Esther", role: "Lab Specialist", extension: "5102", department: "Technology", room: "", keywords: ["ting","esther","lab specialist","plato","computer room"] },
-      { name: "Cristian Cardenas", role: "ELO", extension: "5103", department: "ELO", room: "", keywords: ["cardenas","cristian","elo","plato"] },
-      { name: "Rule, Adam", role: "Careers", extension: "5608", department: "Careers", room: "", keywords: ["rule","adam","careers","career center"] },
-      { name: "Mederos, Melani", role: "Career Center", extension: "5604", department: "Careers", room: "", keywords: ["mederos","melani","career center","careers"] },
-      { name: "Data Specialist", role: "Data Specialist", extension: "5761", department: "Data", room: "", keywords: ["data specialist","data","torres"] },
-      { name: "Erik Torres", role: "Data Specialist", extension: "5761", department: "Data", room: "", keywords: ["torres","erik","data specialist","data"] }
+      { name: "Susan Avrit", role: "Counselor", extension: "5775", department: "Counseling", room: "", keywords: ["avrit","susan","counselor","counseling"] }
+    ];
+
+    const defaultSuggestionNames = [
+      "PVHS Emergency Line",
+      "PVHS Maintenance",
+      "Police/Fire Emergency",
+      "SM Police Dept",
+      "SMPD & Fire Dispatch",
+      "Karine Perez",
+      "Eddie Hernandez"
     ];
 
     const searchInput = document.getElementById("searchInput");
     const resultsList = document.getElementById("resultsList");
     const resultCount = document.getElementById("resultCount");
+    const popoutBtn = document.getElementById("popoutBtn");
 
     function normalizeText(value) {
       return String(value || "")
@@ -617,26 +559,17 @@
       const q = normalizeText(query);
 
       if (!q) {
-        return [
-          extensionSearch.find(x => x.name === "Dr. Paul Robinson"),
-          extensionSearch.find(x => x.name === "Receptionist"),
-          extensionSearch.find(x => x.name === "Attendance Office"),
-          extensionSearch.find(x => x.name === "Technology Help Desk"),
-          extensionSearch.find(x => x.name === "Chris Silva"),
-          extensionSearch.find(x => x.name === "Laura Garcia Solorio"),
-          extensionSearch.find(x => x.name === "Christian Basulto"),
-          extensionSearch.find(x => x.name === "Susan Avrit")
-        ].filter(Boolean);
+        return defaultSuggestionNames
+          .map(name => extensionSearch.find(x => x.name === name))
+          .filter(Boolean);
       }
 
-      const scored = extensionSearch
+      return extensionSearch
         .map(entry => ({ entry, score: scoreEntry(entry, q) }))
         .filter(item => item.score > 0)
         .sort((a, b) => b.score - a.score || a.entry.name.localeCompare(b.entry.name))
         .slice(0, 12)
         .map(item => item.entry);
-
-      return scored;
     }
 
     function renderResults(query) {
@@ -644,7 +577,7 @@
       resultsList.innerHTML = "";
 
       if (!normalizeText(query)) {
-        resultCount.textContent = "Showing suggested contacts";
+        resultCount.textContent = "Showing suggested emergency contacts";
       } else {
         resultCount.textContent = `${results.length} result${results.length === 1 ? "" : "s"} found`;
       }
@@ -658,18 +591,54 @@
         const item = document.createElement("div");
         item.className = "result-item";
 
-        const roomLine = entry.room ? `<p class="result-dept">ROOM: ${entry.room}</p>` : "";
+        const roleText = (entry.role || "").trim();
+        const deptText = (entry.department || "").trim();
+        const roomText = (entry.room || "").trim();
+
+        const roleLine = roleText ? `<p class="result-line">${roleText}</p>` : "";
+        const deptLine = deptText && normalizeText(deptText) !== normalizeText(roleText)
+          ? `<p class="result-line">${deptText}</p>`
+          : "";
+        const roomLine = roomText ? `<p class="result-line">Room: ${roomText}</p>` : "";
 
         item.innerHTML = `
           <p class="result-name">${entry.name}</p>
-          <p class="result-role">${entry.role}</p>
-          <p class="result-dept">${entry.department}</p>
+          ${roleLine}
+          ${deptLine}
           ${roomLine}
-          <p class="result-ext">EXTENSION: ${entry.extension}</p>
+          <p class="result-ext">Extension: ${entry.extension || "TBD"}</p>
         `;
 
         resultsList.appendChild(item);
       }
+    }
+
+    function openPopoutWindow() {
+      const width = 460;
+      const height = 980;
+      const left = Math.max(0, Math.round((window.screen.width - width) / 2));
+      const top = Math.max(0, Math.round((window.screen.height - height) / 2));
+
+      window.open(
+        window.location.href,
+        "pvhsExtensionSearchPopout",
+        [
+          `width=${width}`,
+          `height=${height}`,
+          `left=${left}`,
+          `top=${top}`,
+          "resizable=yes",
+          "scrollbars=no",
+          "toolbar=no",
+          "menubar=no",
+          "location=no",
+          "status=no"
+        ].join(",")
+      );
+    }
+
+    if (popoutBtn) {
+      popoutBtn.addEventListener("click", openPopoutWindow);
     }
 
     searchInput.addEventListener("input", () => {
