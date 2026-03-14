@@ -19,7 +19,7 @@
     :root {
       --teal: #007474; --white: #f7fbfb; --muted: #cfe3e3;
       --panel: rgba(255,255,255,0.08); --panel-border: rgba(255,255,255,0.12);
-      --shadow: 0 20px 46px rgba(0,0,0,0.30); --app-spacing: 18px; --radius: 34px;
+      --shadow: 0 20px 46px rgba(0,0,0,0.30); --app-spacing: 16px; --radius: 34px;
       --white-gradient: linear-gradient(180deg, #ffffff 0%, #dceaea 100%);
       --red-gradient: linear-gradient(180deg, #ffb8b8 0%, #ff5b5b 58%, #b80000 100%);
       --green-gradient: linear-gradient(180deg, #d2ffcf 0%, #5bff61 58%, #00b806 100%);
@@ -30,7 +30,7 @@
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
     html { height: -webkit-fill-available; }
     html, body { width: 100%; height: 100%; min-height: 100%; background: #021414; overflow: hidden; }
-    body { min-height: 100vh; min-height: 100dvh; min-height: -webkit-fill-available; font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; color: var(--white); touch-action: none; user-select: none; }
+    body { min-height: 100vh; min-height: 100dvh; min-height: -webkit-fill-available; font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; color: var(--white); touch-action: none; user-select: none; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 
     /* The Frame ensures the app stays centered with margins when resized on desktop */
     .frame { 
@@ -67,7 +67,7 @@
     /* Header in one single line */
     .top-row {
       display: flex; align-items: center; justify-content: space-between;
-      width: 100%; gap: 8px; height: 44px; flex-shrink: 0; margin-bottom: 6px;
+      width: 100%; gap: 10px; height: 42px; flex-shrink: 0; margin-bottom: 4px;
     }
 
     /* Flat Action Pill */
@@ -75,56 +75,57 @@
       display: flex; background: rgba(255, 255, 255, 0.08); border: 1px solid var(--panel-border); 
       border-radius: 12px; overflow: hidden; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
     }
-    .pill-btn { appearance: none; background: transparent; border: none; color: #fff; font-size: 10px; font-weight: 900; text-transform: uppercase; padding: 8px 12px; cursor: pointer; text-decoration: none; display: flex; align-items: center; transition: background 0.2s; }
+    .pill-btn { appearance: none; background: transparent; border: none; color: #fff; font-size: 9.5px; font-weight: 700; text-transform: uppercase; padding: 8px 12px; cursor: pointer; text-decoration: none; display: flex; align-items: center; transition: background 0.2s; }
     .pill-btn:active { background: var(--card-hover); }
     .pill-divider { width: 1px; background: var(--panel-border); height: 100%; }
 
     .logo-clear { width: 42px; height: auto; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.24)); flex-shrink: 0; }
-    .page-title { flex: 1; font-size: 16px; font-weight: 900; color: #dff7f7; text-transform: uppercase; margin: 0; text-align: center; letter-spacing: 1px; }
+    .page-title { flex: 1; font-size: 15px; font-weight: 700; color: #dff7f7; text-transform: uppercase; margin: 0; text-align: center; letter-spacing: 0.14em; }
 
-    .card { width: 100%; border-radius: 28px; background: var(--panel); border: 1px solid var(--panel-border); backdrop-filter: blur(10px); box-shadow: var(--soft-shadow); margin-bottom: 12px; }
+    .card { width: 100%; border-radius: 26px; background: var(--panel); border: 1px solid var(--panel-border); backdrop-filter: blur(10px); box-shadow: var(--soft-shadow); margin-bottom: 10px; }
     
-    .period-card { padding: 18px 14px; display: flex; flex-direction: column; align-items: center; gap: 2px; flex-shrink: 0; }
-    .school-card { padding: 18px 14px; text-align: center; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+    .period-card { padding: 16px 14px 14px; display: flex; flex-direction: column; align-items: center; gap: 0; flex-shrink: 0; }
+    .school-card { padding: 16px 14px 14px; text-align: center; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
 
     /* WEATHER CARD STYLE */
     .weather-card { 
-      padding: 14px 14px; text-align: center; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+      padding: 12px 14px; text-align: center; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
     }
-    .weather-label { font-size: 11px; font-weight: 800; color: var(--muted); text-transform: uppercase; margin: 0; letter-spacing: 0.5px;}
-    .weather-text { font-size: 18px; font-weight: 900; color: #ffffff; text-transform: uppercase; margin: 0; letter-spacing: 0.5px;}
+    .weather-label { font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; margin: 0; letter-spacing: 0.14em;}
+    .weather-text { font-size: 16px; font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0; letter-spacing: 0.04em;}
 
-    .block-label { font-size: clamp(20px, 6vw, 26px); line-height: 1; font-weight: 900; text-transform: uppercase; margin: 0; color: #00d1d1; text-align: center; }
+    .block-label { font-size: clamp(18px, 5vw, 24px); line-height: 1.02; font-weight: 700; text-transform: uppercase; margin: 0 0 4px 0; color: #40dede; text-align: center; letter-spacing: 0.08em; }
     
-    /* Dynamic scaling to prevent clipping */
     .timer { 
       width: 100%;
-      padding: 0 10px;
-      font-size: clamp(72px, 20.6cqw, 148px);
-      line-height: 0.98; font-weight: 900; letter-spacing: -2px; margin: 8px 0;
+      padding: 0 6px;
+      font-size: 128px;
+      line-height: 0.9; font-weight: 900; letter-spacing: -0.05em; margin: 2px 0 10px;
       text-align: center; text-shadow: 0 10px 26px rgba(0,0,0,0.30);
       font-variant-numeric: tabular-nums;
+      white-space: nowrap;
     }
     .timer.normal { background: var(--white-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .timer.warning { background: var(--red-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .timer.rest { background: var(--green-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
-    .subtext { font-size: 12px; font-weight: 800; color: var(--muted); text-transform: uppercase; margin: 0; text-wrap: balance; text-align: center; }
-    .status-row { font-size: 11px; font-weight: 800; color: #d9f2f2; text-transform: uppercase; margin: 4px 0 0 0; opacity: 0.8; }
+    .subtext { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; margin: 0; text-wrap: balance; text-align: center; letter-spacing: 0.04em; }
+    .status-row { font-size: 10px; font-weight: 600; color: #d9f2f2; text-transform: uppercase; margin: 4px 0 0 0; opacity: 0.78; letter-spacing: 0.08em; }
 
-    .school-label { font-size: 14px; font-weight: 900; color: #ffffff; text-transform: uppercase; margin-bottom: 2px; }
+    .school-label { font-size: 13px; font-weight: 700; color: #ffffff; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.08em; }
     .school-number {
       width: 100%;
-      padding: 0 8px;
-      font-size: clamp(74px, 18.5cqw, 88px);
-      line-height: 0.98; font-weight: 900; letter-spacing: -2px;
+      padding: 0 2px;
+      font-size: 92px;
+      line-height: 0.92; font-weight: 900; letter-spacing: -0.05em;
       background: var(--white-gradient); -webkit-background-clip: text; background-clip: text; color: transparent;
-      margin: 4px 0; text-align: center; font-variant-numeric: tabular-nums;
+      margin: 2px 0 8px; text-align: center; font-variant-numeric: tabular-nums;
+      white-space: nowrap;
     }
-    .detail-row { font-size: 11px; color: #d9f2f2; margin: 2px 0; font-weight: 800; text-transform: uppercase; text-align: center; }
+    .detail-row { font-size: 10px; color: #d9f2f2; margin: 2px 0; font-weight: 600; text-transform: uppercase; text-align: center; letter-spacing: 0.04em; }
     .detail-row strong { color: #ffffff; }
 
-    .footer-note { margin-top: auto; padding: 16px 0 4px 0; font-size: 10px; color: #b5d4d4; font-weight: 800; text-align: center; flex-shrink: 0; }
+    .footer-note { margin-top: auto; padding: 10px 0 3px 0; font-size: 9.5px; color: #b5d4d4; font-weight: 600; text-align: center; flex-shrink: 0; }
 
     body.is-standalone { background: #021414; }
 
@@ -231,6 +232,28 @@
     const popoutBtn = document.getElementById("popoutBtn"); 
     const homeLink = document.getElementById("homeLink");
     const navLinks = document.querySelectorAll(".nav-link");
+    const timerTextEl = document.getElementById("timerText");
+    const daysLeftEl = document.getElementById("daysLeft");
+
+    function fitDisplayNumber(el, minPx, maxPx) {
+      if (!el) return;
+      el.style.fontSize = `${maxPx}px`;
+      const availableWidth = Math.max(0, el.clientWidth - 2);
+      if (!availableWidth) return;
+      const actualWidth = el.scrollWidth;
+      if (actualWidth <= availableWidth) return;
+      const scaled = Math.floor(maxPx * (availableWidth / actualWidth) * 0.985);
+      el.style.fontSize = `${Math.max(minPx, scaled)}px`;
+    }
+
+    function fitCountdownText() {
+      fitDisplayNumber(timerTextEl, 42, window.innerWidth <= 430 ? 110 : 128);
+      fitDisplayNumber(daysLeftEl, 56, 92);
+    }
+
+    function scheduleFitCountdownText() {
+      requestAnimationFrame(() => requestAnimationFrame(fitCountdownText));
+    }
 
     function updateStandaloneViewportVars() {
       if (!isStandalone) return;
@@ -259,12 +282,19 @@
     if (isStandalone) {
       document.body.classList.add('is-standalone');
       updateStandaloneViewportVars();
+      scheduleFitCountdownText();
       window.addEventListener('resize', updateStandaloneViewportVars);
+      window.addEventListener('resize', scheduleFitCountdownText);
       window.addEventListener('orientationchange', updateStandaloneViewportVars);
+      window.addEventListener('orientationchange', scheduleFitCountdownText);
       window.addEventListener('pageshow', updateStandaloneViewportVars);
+      window.addEventListener('pageshow', scheduleFitCountdownText);
       window.visualViewport?.addEventListener('resize', updateStandaloneViewportVars);
+      window.visualViewport?.addEventListener('resize', scheduleFitCountdownText);
       setTimeout(updateStandaloneViewportVars, 250);
       setTimeout(updateStandaloneViewportVars, 800);
+      setTimeout(scheduleFitCountdownText, 250);
+      setTimeout(scheduleFitCountdownText, 800);
     }
 
     // PERSISTENT UI LOGIC
@@ -342,6 +372,7 @@
             document.getElementById("timerText").textContent = formatTime(rem);
             document.getElementById("timerText").className = rem <= 300 ? "timer warning" : "timer normal";
             document.getElementById("subText").textContent = i < blocks.length - 1 ? `Next: ${blocks[i + 1].l}` : "Almost done for today!";
+            scheduleFitCountdownText();
             return;
           }
         }
@@ -367,10 +398,13 @@
       } else {
         document.getElementById("subText").textContent = "School's out, get some rest!";
       }
+
+      scheduleFitCountdownText();
     }
 
     function parseToSec(t) { const [h,m] = t.split(":").map(Number); return (h*3600)+(m*60); }
     setInterval(updateApp, 1000); updateApp();
+    scheduleFitCountdownText();
 
     // LIVE WEATHER FETCH SCRIPT
     async function fetchWeather() {
