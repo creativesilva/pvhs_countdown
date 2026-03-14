@@ -20,14 +20,14 @@
       --teal: #007474; --white: #f7fbfb; --muted: #cfe3e3;
       --panel: rgba(255,255,255,0.08); --panel-border: rgba(255,255,255,0.12);
       --shadow: 0 20px 46px rgba(0,0,0,0.30); --soft-shadow: 0 12px 24px rgba(0,0,0,0.22);
-      --card-hover: rgba(255,255,255,0.12); --app-spacing: 18px; --radius: 34px;
+      --card-hover: rgba(255,255,255,0.12); --app-spacing: 16px; --radius: 34px;
       --standalone-app-width: 100vw; --standalone-app-height: 100dvh;
     }
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
     html { height: -webkit-fill-available; }
     html, body { width: 100%; height: 100%; min-height: 100%; background: #021414; overflow: hidden; }
-    body { min-height: 100vh; min-height: 100dvh; min-height: -webkit-fill-available; font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; color: var(--white); touch-action: none; user-select: none; }
+    body { min-height: 100vh; min-height: 100dvh; min-height: -webkit-fill-available; font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; color: var(--white); touch-action: none; user-select: none; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 
     /* The Frame ensures the app stays centered with margins on Desktop */
     .frame { 
@@ -57,12 +57,12 @@
 
     .ghost-logo { position: absolute; top: 56%; left: 50%; width: 182%; opacity: 0.07; transform: translate(-50%, -50%); filter: grayscale(100%) contrast(108%) brightness(114%); pointer-events: none; z-index: 0; }
     
-    .content { position: relative; z-index: 1; width: 100%; height: 100%; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+    .content { position: relative; z-index: 1; width: 100%; height: 100%; display: flex; flex-direction: column; gap: 8px; overflow: hidden; }
 
     /* ONE-LINE HEADER */
     .top-row {
       display: flex; align-items: center; justify-content: space-between;
-      width: 100%; gap: 8px; height: 44px; flex-shrink: 0; margin-bottom: 4px;
+      width: 100%; gap: 10px; height: 42px; flex-shrink: 0; margin-bottom: 2px;
     }
 
     /* Flat Action Pill */
@@ -70,36 +70,36 @@
       display: flex; background: rgba(255, 255, 255, 0.08); border: 1px solid var(--panel-border); 
       border-radius: 12px; overflow: hidden; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
     }
-    .pill-btn { appearance: none; background: transparent; border: none; color: #fff; font-size: 10px; font-weight: 900; text-transform: uppercase; padding: 8px 12px; cursor: pointer; text-decoration: none; display: flex; align-items: center; transition: background 0.2s; }
+    .pill-btn { appearance: none; background: transparent; border: none; color: #fff; font-size: 9.5px; font-weight: 700; text-transform: uppercase; padding: 8px 12px; cursor: pointer; text-decoration: none; display: flex; align-items: center; transition: background 0.2s; }
     .pill-btn:active { background: var(--card-hover); }
     .pill-divider { width: 1px; background: var(--panel-border); height: 100%; }
 
     .logo-clear { width: 42px; height: auto; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.24)); flex-shrink: 0; }
-    .page-title { flex: 1; font-size: 15px; font-weight: 900; color: #dff7f7; text-transform: uppercase; margin: 0; text-align: center; letter-spacing: 0.5px; }
+    .page-title { flex: 1; font-size: 14px; font-weight: 700; color: #dff7f7; text-transform: uppercase; margin: 0; text-align: center; letter-spacing: 0.14em; }
 
-    .search-card { padding: 16px 14px; border-radius: 28px; background: var(--panel); border: 1px solid var(--panel-border); backdrop-filter: blur(10px); flex-shrink: 0; box-shadow: var(--soft-shadow); }
-    .search-title { margin: 0 0 4px 0; font-size: 32px; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; text-align: center; }
-    .helper-text { margin: 0 0 12px 0; font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; text-align: center; }
-    .search-input { width: 100%; border: 1px solid rgba(255,255,255,0.16); border-radius: 18px; padding: 14px; font-size: 16px; font-weight: 700; color: #fff; background: rgba(0,0,0,0.18); outline: none; text-align: center; }
+    .search-card { padding: 14px; border-radius: 24px; background: var(--panel); border: 1px solid var(--panel-border); backdrop-filter: blur(10px); flex-shrink: 0; box-shadow: var(--soft-shadow); }
+    .search-title { margin: 0 0 4px 0; font-size: 28px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; text-align: center; }
+    .helper-text { margin: 0 0 10px 0; font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; text-align: center; letter-spacing: 0.08em; }
+    .search-input { width: 100%; border: 1px solid rgba(255,255,255,0.16); border-radius: 16px; padding: 12px 14px; font-size: 15px; font-weight: 500; color: #fff; background: rgba(0,0,0,0.18); outline: none; text-align: center; }
 
     .results-card { 
-      padding: 14px 14px 0 14px; border-radius: 28px; background: var(--panel); border: 1px solid var(--panel-border); 
+      padding: 12px 12px 0 12px; border-radius: 24px; background: var(--panel); border: 1px solid var(--panel-border); 
       backdrop-filter: blur(10px); box-shadow: var(--soft-shadow);
       display: flex; flex-direction: column; flex: 1; overflow: hidden;
     }
-    .result-count { margin-bottom: 10px; font-size: 11px; font-weight: 900; color: #dff7f7; text-transform: uppercase; text-align: center; opacity: 0.8; flex-shrink: 0;}
+    .result-count { margin-bottom: 8px; font-size: 10px; font-weight: 600; color: #dff7f7; text-transform: uppercase; text-align: center; opacity: 0.8; flex-shrink: 0; letter-spacing: 0.08em;}
     
     .results-list { 
-      flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-bottom: 20px;
+      flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding-bottom: 16px;
       -webkit-overflow-scrolling: touch;
     }
 
-    .result-item { border-radius: 20px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10); padding: 12px; flex-shrink: 0; }
-    .result-name { margin: 0 0 2px 0; font-size: 16px; font-weight: 900; color: #fff; text-transform: uppercase; text-align: center; }
-    .result-line { margin: 0; font-size: 11px; font-weight: 800; color: #d8f1f1; text-transform: uppercase; opacity: 0.8; text-align: center; }
-    .result-ext { margin-top: 6px; font-size: 15px; font-weight: 900; color: #fff; text-align: center; }
+    .result-item { border-radius: 18px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10); padding: 10px 12px; flex-shrink: 0; }
+    .result-name { margin: 0 0 3px 0; font-size: 15px; font-weight: 700; color: #fff; text-transform: none; text-align: center; }
+    .result-line { margin: 0; font-size: 10px; font-weight: 600; color: #d8f1f1; text-transform: none; opacity: 0.82; text-align: center; }
+    .result-ext { margin-top: 6px; font-size: 14px; font-weight: 700; color: #fff; text-align: center; }
 
-    .footer-note { margin-top: auto; padding: 12px 0 4px 0; font-size: 10px; color: #b5d4d4; font-weight: 800; text-align: center; flex-shrink: 0; }
+    .footer-note { margin-top: auto; padding: 10px 0 3px 0; font-size: 9.5px; color: #b5d4d4; font-weight: 600; text-align: center; flex-shrink: 0; }
 
     body.is-standalone { background: #021414; }
 
