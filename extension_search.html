@@ -11,8 +11,8 @@
   <meta name="theme-color" content="#007474">
   
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="apple-touch-icon" href="PV_Logo.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="PV_Logo.png">
+  <link rel="apple-touch-icon" href="PV_AppIcon.png">
+  <link rel="icon" type="image/png" sizes="1024x1024" href="PV_AppIcon.png">
   <title>Directory Search</title>
 
   <style>
@@ -99,17 +99,15 @@
     .result-line { margin: 0; font-size: 11px; font-weight: 800; color: #d8f1f1; text-transform: uppercase; opacity: 0.8; text-align: center; }
     .result-ext { margin-top: 6px; font-size: 15px; font-weight: 900; color: #fff; text-align: center; }
 
-    .footer-note { margin-top: auto; padding: 12px 0 4px 0; font-size: 10px; color: #b5d4d4; text-transform: uppercase; font-weight: 800; text-align: center; flex-shrink: 0; }
+    .footer-note { margin-top: auto; padding: 12px 0 4px 0; font-size: 10px; color: #b5d4d4; font-weight: 800; text-align: center; flex-shrink: 0; }
 
-    body.is-standalone {
-      background: radial-gradient(circle at center, rgba(10,34,34,0.94) 0%, rgba(4,20,20,0.98) 46%, rgba(0,116,116,1) 100%);
-    }
+    body.is-standalone { background: #021414; }
 
     body.is-standalone::before {
       content: "";
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at center, rgba(10,34,34,0.94) 0%, rgba(4,20,20,0.98) 46%, rgba(0,116,116,1) 100%);
+      background: #021414;
       pointer-events: none;
       z-index: 0;
     }
@@ -127,17 +125,20 @@
 
     body.is-standalone .app {
       position: absolute;
-      inset: 0;
-      width: var(--standalone-app-width);
-      height: var(--standalone-app-height);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: max(30px, calc(env(safe-area-inset-bottom) + 8px));
+      width: auto;
+      height: auto;
       max-width: none;
       max-height: none;
-      border-radius: 0 0 34px 34px;
+      border-radius: 0 0 42px 42px;
       border: none;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.18);
+      box-shadow: 0 24px 46px rgba(0,0,0,0.22);
       padding-top: max(10px, env(safe-area-inset-top));
       padding-right: max(var(--app-spacing), env(safe-area-inset-right));
-      padding-bottom: max(var(--app-spacing), calc(var(--app-spacing) + env(safe-area-inset-bottom)));
+      padding-bottom: 18px;
       padding-left: max(var(--app-spacing), env(safe-area-inset-left));
     }
 
@@ -187,7 +188,7 @@
           <div class="results-list" id="resultsList"></div>
         </div>
 
-        <div class="footer-note">CREATED BY: MR. SILVA</div>
+        <div class="footer-note">By: CreativeSilva</div>
       </div>
     </div>
   </div>
