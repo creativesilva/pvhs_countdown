@@ -132,11 +132,9 @@
     // DATA SOURCE: Processed from PVHS Phone List 2025-2026
     const extensionSearch = [
       { name: "PVHS Emergency Line", role: "Emergency", extension: "5000", keywords: ["emergency", "urgent"] },
-      { name: "Police/Fire Emergency", role: "Emergency", extension: "911", keywords: ["911", "fire", "police"] },
       { name: "PVHS Maintenance", role: "Emergency", extension: "878-8155", keywords: ["maint", "urgent"] },
       { name: "Chris Silva", role: "VPA / Teacher", extension: "5322", room: "322", keywords: ["photography", "vpa", "art"] },
       { name: "Laura Garcia Solorio", role: "VPA / Teacher", extension: "5322", room: "322", keywords: ["vpa", "art"] },
-      { name: "Dr. Paul Robinson", role: "Principal", extension: "5701", department: "Administration" },
       { name: "Araceli Mandujano", role: "Admin Assistant", extension: "5702", department: "Administration" },
       { name: "Kevin Ilac", role: "Assistant Principal", extension: "5703", department: "Administration" },
       { name: "Merrie Okie-Goldin", role: "Assistant Principal", extension: "5707", department: "Administration" },
@@ -183,10 +181,10 @@
       { name: "Michele Lyon", role: "Teacher", extension: "5606", department: "Special Ed" },
       { name: "Teri Wisz (formerly Magni)", role: "Teacher", extension: "5301", department: "English" },
       { name: "Tech Help Desk", role: "IT Support", extension: "4612" }
-      // ... Note: Array can be expanded with more entries from your CSV
     ];
 
-    const defaultSuggestions = ["PVHS Emergency Line", "PVHS Maintenance", "Police/Fire Emergency", "Eddie Hernandez", "Karine Perez", "Dr. Paul Robinson"];
+    // Updated suggestions: Removed Dr. Paul Robinson and 911
+    const defaultSuggestions = ["PVHS Emergency Line", "PVHS Maintenance", "Eddie Hernandez", "Karine Perez"];
 
     const searchInput = document.getElementById("searchInput");
     const resultsList = document.getElementById("resultsList");
