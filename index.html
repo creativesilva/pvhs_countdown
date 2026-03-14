@@ -3,10 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="PVHS Tools">
   <meta name="theme-color" content="#007474">
+  
   <link rel="apple-touch-icon" href="PV_Logo.png">
   <link rel="icon" type="image/png" sizes="192x192" href="PV_Logo.png">
   <title>PVHS Tools</title>
@@ -20,23 +22,42 @@
     }
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
-    html, body { width: 100%; height: 100%; background: #021414; overflow: hidden; }
-    body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; color: var(--white); touch-action: none; user-select: none; }
-
-    /* Outer Centering Frame */
-    .frame {
-      width: 100%; height: 100dvh; display: flex; align-items: center; justify-content: center;
-      padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
+    
+    html, body { 
+      width: 100%; height: 100%; 
+      background: #021414; 
+      overflow: hidden; /* Locks the browser window */
     }
 
-    /* THE LOCKED IPHONE BUBBLE */
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+      color: var(--white); 
+      touch-action: pan-y; /* Allows scrolling but kills pinch-zoom */
+      user-select: none;
+    }
+
+    /* Centering Frame for Desktop/Browser view */
+    .frame {
+      width: 100%; height: 100dvh;
+      display: flex; align-items: center; justify-content: center;
+      padding: env(safe-area-inset-top) 10px env(safe-area-inset-bottom) 10px;
+    }
+
+    /* THE LOCKED IPHONE BUBBLE: Maintains shape on desktop/popout */
     .app {
-      width: 430px; height: 880px; 
-      max-width: 100%; max-height: calc(100dvh - 20px);
-      border-radius: 34px; overflow: hidden; position: relative;
-      box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,0.12);
+      width: 430px; 
+      height: 880px; 
+      max-width: 100%; 
+      max-height: 95dvh; /* Keeps the bubble visible above browser bars */
+      aspect-ratio: 430 / 880;
+      border-radius: 34px; 
+      overflow: hidden; 
+      position: relative;
+      box-shadow: var(--shadow); 
+      border: 1px solid rgba(255,255,255,0.12);
       background: radial-gradient(circle at center, rgba(10,34,34,0.94) 0%, rgba(4,20,20,0.98) 46%, rgba(0,116,116,1) 100%);
-      display: flex; flex-direction: column; isolation: isolate;
+      display: flex; flex-direction: column; 
+      isolation: isolate;
     }
 
     .app::before {
@@ -48,25 +69,32 @@
 
     .ghost-logo { position: absolute; top: 56%; left: 50%; width: 182%; opacity: 0.07; transform: translate(-50%, -50%); filter: grayscale(100%) contrast(108%) brightness(114%); pointer-events: none; z-index: 0; }
     
+    /* Scrollable internal content area */
     .content { 
       position: relative; z-index: 1; width: 100%; height: 100%; 
       display: flex; flex-direction: column; align-items: center; 
-      overflow-y: auto; -webkit-overflow-scrolling: touch;
+      overflow-y: auto; /* Internal scrolling if content is too tall */
+      -webkit-overflow-scrolling: touch;
       padding: 10px var(--app-spacing) 20px var(--app-spacing);
     }
     
     .top-actions { width: 100%; height: 44px; display: flex; justify-content: flex-end; align-items: center; flex-shrink: 0; }
 
+    /* FLAT STYLE POP OUT - No drop shadow */
     .popout-pill {
       display: none; appearance: none;
-      background: rgba(255, 255, 255, 0.08); border: 1px solid var(--panel-border);
-      border-radius: 14px; padding: 9px 12px; color: #fff; font-size: 11px; font-weight: 900; 
-      text-transform: uppercase; cursor: pointer; backdrop-filter: blur(4px);
+      background: rgba(255, 255, 255, 0.08); 
+      border: 1px solid var(--panel-border);
+      border-radius: 14px; padding: 9px 14px; 
+      color: #fff; font-size: 11px; font-weight: 900; 
+      text-transform: uppercase; cursor: pointer; 
+      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
     }
 
+    /* Content Layout Adjustments */
     .header { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 4px; margin-top: -5px; }
     .logo-clear { width: 76px; height: auto; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.24)); }
-    .title { margin: 0; font-size: 42px; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; text-align: center; }
+    .title { margin: 0; font-size: clamp(32px, 10vw, 42px); font-weight: 900; text-transform: uppercase; letter-spacing: -1px; text-align: center; }
     .greeting { margin: 6px 0 0 0; font-size: 13px; font-weight: 800; color: #00d1d1; text-transform: uppercase; letter-spacing: 1px; }
     .subtitle { margin: 4px 0 14px 0; max-width: 280px; font-size: 13px; line-height: 1.4; font-weight: 700; color: var(--muted); text-align: center; }
 
@@ -75,25 +103,27 @@
       width: 100%; border-radius: 24px; background: var(--panel); border: 1px solid var(--panel-border);
       text-decoration: none; color: var(--white); padding: 22px 18px;
       display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, transform 0.1s;
     }
-    .launch-label { font-size: 18px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+    .launch-card:active { transform: scale(0.98); background: var(--card-hover); }
+    .launch-label { font-size: 18px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
 
     .quick-links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
     .quick-link-btn {
       display: flex; align-items: center; justify-content: center; min-height: 56px;
       padding: 10px; border-radius: 18px; text-decoration: none; color: #fff;
       background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-      backdrop-filter: blur(4px); text-align: center;
+      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); text-align: center;
     }
     .quick-link-label { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; }
 
     .footer-note { margin-top: auto; padding: 20px 0 4px 0; font-size: 10px; color: #b5d4d4; text-transform: uppercase; font-weight: 800; text-align: center; flex-shrink: 0; }
 
-    /* MOBILE OVERRIDE: Full screen on actual phones */
+    /* Actual phone view: Fills screen but keeps proportions */
     @media (max-width: 430px) {
       .frame { align-items: flex-start; padding: 0; }
       .app { width: 100vw; height: 100dvh; max-height: none; border-radius: 0; border: none; }
-      body { touch-action: pan-y; }
+      .popout-pill { display: none !important; }
     }
   </style>
 </head>
@@ -112,8 +142,8 @@
           <p class="subtitle">Quick access to campus tools and directory.</p>
         </div>
         <div class="launcher-stack">
-          <a id="countdownLink" class="launch-card" href="countdown.html"><h2 class="launch-label">Countdown</h2></a>
-          <a id="directoryLink" class="launch-card" href="extension_search.html"><h2 class="launch-label">Directory</h2></a>
+          <a class="nav-link launch-card" href="countdown.html"><h2 class="launch-label">Countdown</h2></a>
+          <a class="nav-link launch-card" href="extension_search.html"><h2 class="launch-label">Directory</h2></a>
         </div>
         <div class="quick-links-grid">
           <a class="quick-link-btn" href="https://maintenance.facilitron.com/anonymous/SantaMariaJUHSD/newworkorder" target="_blank"><p class="quick-link-label">Maintenance</p></a>
@@ -134,14 +164,16 @@
     const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
 
     const popoutBtn = document.getElementById("popoutBtn");
-    const countdownLink = document.getElementById("countdownLink");
-    const directoryLink = document.getElementById("directoryLink");
+    const navLinks = document.querySelectorAll(".nav-link");
 
-    // PERSISTENT LOGIC: Rewrite links if in popout mode
+    // PERSISTENT LOGIC: Rewrite internal links and hide button permanently
     if (isPopout) {
-      popoutBtn.style.display = 'none';
-      countdownLink.href = "countdown.html?mode=popout";
-      directoryLink.href = "extension_search.html?mode=popout";
+      popoutBtn.remove(); // Removes the button from the DOM entirely
+      navLinks.forEach(link => {
+        const url = new URL(link.href, window.location.origin);
+        url.searchParams.set('mode', 'popout');
+        link.href = url.toString();
+      });
     } else if (!isMobile && !isStandalone) {
       popoutBtn.style.display = 'block';
     }
