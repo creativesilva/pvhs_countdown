@@ -28,7 +28,7 @@
     html, body { width: 100%; height: 100%; background: #021414; overflow: hidden; }
     body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; color: var(--white); touch-action: none; user-select: none; }
 
-    /* The Frame ensures app stays centered with margins on Desktop/Popout */
+    /* The Frame ensures the app stays centered with margins on Desktop/Popout */
     .frame { 
       width: 100%; height: 100dvh; display: flex; align-items: center; justify-content: center; 
       padding: 10px;
@@ -60,12 +60,13 @@
       overflow-y: auto; -webkit-overflow-scrolling: touch;
     }
 
+    /* Header in one single line */
     .top-row {
       display: flex; align-items: center; justify-content: space-between;
       width: 100%; gap: 8px; height: 44px; flex-shrink: 0; margin-bottom: 6px;
     }
 
-    /* Flat Action Pill */
+    /* Flat Action Pill (Matches Index) */
     .action-pill { 
       display: flex; background: rgba(255, 255, 255, 0.08); border: 1px solid var(--panel-border); 
       border-radius: 12px; overflow: hidden; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
@@ -84,7 +85,7 @@
 
     .block-label { font-size: clamp(20px, 6vw, 26px); line-height: 1; font-weight: 900; text-transform: uppercase; margin: 0; color: #00d1d1; text-align: center; }
     
-    /* DYNAMIC TIMER SCALING - Never clips */
+    /* Dynamic scaling to prevent clipping */
     .timer { 
       font-size: 22cqw; 
       line-height: 0.9; font-weight: 900; letter-spacing: -3px; margin: 8px 0; text-shadow: 0 10px 26px rgba(0,0,0,0.30); 
@@ -101,7 +102,7 @@
     .detail-row { font-size: 11px; color: #d9f2f2; margin: 2px 0; font-weight: 800; text-transform: uppercase; text-align: center; }
     .detail-row strong { color: #ffffff; }
 
-    .footer-note { margin-top: auto; padding: 12px 0 4px 0; font-size: 10px; color: #b5d4d4; text-transform: uppercase; font-weight: 800; text-align: center; flex-shrink: 0; }
+    .footer-note { margin-top: auto; padding: 20px 0 4px 0; font-size: 10px; color: #b5d4d4; text-transform: uppercase; font-weight: 800; text-align: center; flex-shrink: 0; }
 
     /* Phone Override: Protected if in Pop-Out Mode */
     @media (max-width: 430px) {
@@ -121,7 +122,7 @@
           <img src="PV_Logo.png" alt="Logo" class="logo-clear">
           <h1 class="page-title">Countdown</h1>
           <div class="action-pill">
-            <a href="index.html" class="pill-btn nav-link">Home</a>
+            <a id="homeLink" href="index.html" class="pill-btn nav-link">Home</a>
             <div id="popoutSection" style="display: none;">
               <div class="pill-divider"></div>
               <button id="popoutBtn" class="pill-btn" type="button">Pop Out</button>
@@ -156,6 +157,7 @@
     const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
 
     const popoutSection = document.getElementById("popoutSection");
+    const popoutBtn = document.getElementById("popoutBtn"); // ADDED: Definition for listener
     const navLinks = document.querySelectorAll(".nav-link");
 
     // PERSISTENT UI LOGIC
@@ -238,7 +240,8 @@
     function parseToSec(t) { const [h,m] = t.split(":").map(Number); return (h*3600)+(m*60); }
     setInterval(updateApp, 1000); updateApp();
 
-    document.getElementById("popoutBtn")?.addEventListener("click", () => {
+    // ADDED: Optional chaining just in case, but variable is now defined above
+    popoutBtn?.addEventListener("click", () => {
       window.open('countdown.html?mode=popout', 'pvPop', 'width=450,height=900,resizable=yes,scrollbars=no');
     });
   </script>
