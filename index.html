@@ -30,14 +30,14 @@
 
     .frame {
       width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
-      padding: max(12px, env(safe-area-inset-top)) 12px max(12px, env(safe-area-inset-bottom)) 12px;
+      padding: env(safe-area-inset-top) 12px env(safe-area-inset-bottom) 12px;
     }
 
     .app {
-      width: min(100%, 430px);
-      height: 100%;
+      height: 92dvh;
+      width: auto;
       aspect-ratio: 430 / 880;
-      max-height: calc(100dvh - 24px);
+      max-width: min(100%, 430px);
       border-radius: 34px;
       overflow: hidden;
       position: relative;
@@ -62,17 +62,18 @@
       pointer-events: none; z-index: 0;
     }
 
-    .content { position: relative; z-index: 1; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .content { position: relative; z-index: 1; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 10px; }
     
-    .top-actions { width: 100%; display: flex; justify-content: flex-end; min-height: 34px; }
+    /* Top Actions Container - Locked height for alignment */
+    .top-actions { width: 100%; height: 34px; display: flex; justify-content: flex-end; align-items: center; flex-shrink: 0; }
     
-    /* Pop Out Pill - Matches Home Button Style */
+    /* MATCHED PILL STYLE */
     .popout-pill {
       appearance: none;
       background: rgba(255, 255, 255, 0.08); 
       border: 1px solid var(--panel-border);
       border-radius: 12px; 
-      padding: 10px 12px; 
+      padding: 10px 14px; 
       color: #fff; 
       font-size: 10px;
       font-weight: 900; 
@@ -80,51 +81,48 @@
       cursor: pointer; 
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
-      text-decoration: none;
       box-shadow: var(--soft-shadow);
+      transition: background 0.2s, transform 0.1s;
     }
 
-    .header { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .logo-clear { width: 80px; height: auto; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.24)); }
-    .title { margin: 0; font-size: clamp(34px, 10vw, 48px); line-height: 1; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; }
-    .greeting { margin: 0; font-size: 14px; font-weight: 800; color: #00d1d1; text-transform: uppercase; letter-spacing: 1px; }
-    
-    /* Subtitle centered */
-    .subtitle { margin: 0; max-width: 280px; font-size: 13px; line-height: 1.4; font-weight: 700; color: var(--muted); text-wrap: balance; text-align: center; }
+    .popout-pill:active { transform: scale(0.95); background: var(--card-hover); }
 
-    .launcher-stack { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+    .header { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .logo-clear { width: 70px; height: auto; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.24)); }
+    .title { margin: 0; font-size: clamp(30px, 8vh, 42px); line-height: 1; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; text-align: center; }
+    .greeting { margin: 0; font-size: 12px; font-weight: 800; color: #00d1d1; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+    .subtitle { margin: 0; max-width: 280px; font-size: 12px; line-height: 1.4; font-weight: 700; color: var(--muted); text-wrap: balance; text-align: center; }
+
+    .launcher-stack { width: 100%; display: flex; flex-direction: column; gap: 10px; }
 
     .launch-card {
       width: 100%; border-radius: 24px; background: var(--panel); border: 1px solid var(--panel-border);
       box-shadow: var(--soft-shadow); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
-      text-decoration: none; color: var(--white); padding: 20px 18px;
-      display: flex; align-items: center; justify-content: center; /* Center buttons */
+      text-decoration: none; color: var(--white); padding: 20px 14px;
+      display: flex; align-items: center; justify-content: center;
       transition: background 0.2s, transform 0.1s;
     }
 
     .launch-card:active { transform: scale(0.98); background: var(--card-hover); }
+    .launch-label { margin: 0; font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; }
 
-    /* Centered label inside buttons */
-    .launch-label { margin: 0; font-size: 18px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; }
-
-    .quick-links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
+    .quick-links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; }
 
     .quick-link-btn {
-      display: flex; align-items: center; justify-content: center; min-height: 54px;
-      padding: 10px; border-radius: 18px; text-decoration: none; color: #fff;
+      display: flex; align-items: center; justify-content: center; min-height: 50px;
+      padding: 8px; border-radius: 18px; text-decoration: none; color: #fff;
       background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-      backdrop-filter: blur(4px); text-align: center; transition: background 0.2s;
+      backdrop-filter: blur(4px); text-align: center; transition: background 0.2s, transform 0.1s;
     }
 
     .quick-link-btn:active { transform: scale(0.97); background: var(--card-hover); }
+    .quick-link-label { margin: 0; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.2; text-align: center; }
 
-    .quick-link-label { margin: 0; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.2; }
-
-    .footer-note { margin-top: auto; padding-top: 8px; font-size: 10px; color: #b5d4d4; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; text-align: center; }
+    .footer-note { padding: 4px 0; font-size: 9px; color: #b5d4d4; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; text-align: center; flex-shrink: 0; }
 
     @media (max-width: 430px) {
       .frame { align-items: flex-start; }
-      .app { width: 100%; aspect-ratio: auto; min-height: calc(100dvh - 24px); border-radius: 28px; }
+      .app { height: calc(100dvh - 24px); width: 100%; aspect-ratio: auto; border-radius: 28px; }
     }
   </style>
 </head>
@@ -132,7 +130,6 @@
   <div class="frame">
     <div class="app">
       <img src="PV_Logo.png" alt="" class="ghost-logo">
-
       <div class="content">
         <div class="top-actions">
           <button id="popoutBtn" class="popout-pill" type="button">Pop Out</button>
@@ -142,32 +139,19 @@
           <img src="PV_Logo.png" alt="Logo" class="logo-clear">
           <p class="greeting" id="greetingText">Welcome</p>
           <h1 class="title">PVHS Tools</h1>
-          <p class="subtitle">Quick access to campus countdowns and staff directory.</p>
+          <p class="subtitle">Quick access to campus tools and directory.</p>
         </div>
 
         <div class="launcher-stack">
-          <a class="launch-card" href="countdown.html">
-            <h2 class="launch-label">Classroom Countdown</h2>
-          </a>
-
-          <a class="launch-card" href="extension_search.html">
-            <h2 class="launch-label">Search Directory</h2>
-          </a>
+          <a class="launch-card" href="countdown.html"><h2 class="launch-label">Classroom Countdown</h2></a>
+          <a class="launch-card" href="extension_search.html"><h2 class="launch-label">Search Directory</h2></a>
         </div>
 
         <div class="quick-links-grid">
-          <a class="quick-link-btn" href="https://maintenance.facilitron.com/anonymous/SantaMariaJUHSD/newworkorder" target="_blank">
-            <p class="quick-link-label">Maintenance</p>
-          </a>
-          <a class="quick-link-btn" href="https://smjuhsd.incidentiq.com/" target="_blank">
-            <p class="quick-link-label">IT Support</p>
-          </a>
-          <a class="quick-link-btn" href="https://login.frontlineeducation.com/login" target="_blank">
-            <p class="quick-link-label">Absences</p>
-          </a>
-          <a class="quick-link-btn" href="https://smjuhsd-my.sharepoint.com/:x:/g/personal/etorres_smjuhsd_org/IQBiSObgdkR3R68_dXHYrDwfAbA5RpN-scClTiKQddgcsLU" target="_blank">
-            <p class="quick-link-label">In Lieu</p>
-          </a>
+          <a class="quick-link-btn" href="https://maintenance.facilitron.com/anonymous/SantaMariaJUHSD/newworkorder" target="_blank"><p class="quick-link-label">Maintenance</p></a>
+          <a class="quick-link-btn" href="https://smjuhsd.incidentiq.com/" target="_blank"><p class="quick-link-label">IT Support</p></a>
+          <a class="quick-link-btn" href="https://login.frontlineeducation.com/login" target="_blank"><p class="quick-link-label">Absences</p></a>
+          <a class="quick-link-btn" href="https://smjuhsd-my.sharepoint.com/:x:/g/personal/etorres_smjuhsd_org/IQBiSObgdkR3R68_dXHYrDwfAbA5RpN-scClTiKQddgcsLU" target="_blank"><p class="quick-link-label">In Lieu</p></a>
         </div>
 
         <div class="footer-note">CREATED BY: MR. SILVA</div>
@@ -184,7 +168,7 @@
     if (window.location.search.includes('popout=true')) popoutBtn.style.display = 'none';
 
     popoutBtn.addEventListener("click", () => {
-      const width = 460; const height = 980;
+      const width = 460; const height = 880;
       const left = (window.screen.width - width) / 2;
       const top = (window.screen.height - height) / 2;
       window.open(window.location.href + '?popout=true', 'pvTools', `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=no`);
