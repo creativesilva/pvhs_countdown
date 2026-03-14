@@ -61,7 +61,16 @@
       padding: 2px var(--app-spacing) 12px var(--app-spacing);
     }
     
-    .top-actions { width: 100%; display: flex; justify-content: flex-end; align-items: center; flex-shrink: 0; }
+    .top-actions {
+      width: 100%;
+      min-height: 48px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      flex-shrink: 0;
+      padding-top: 2px;
+      margin-bottom: 2px;
+    }
 
     /* Flat Style Pop Out Pill */
     .popout-pill {
@@ -172,7 +181,7 @@
           <img src="PV_Logo.png" alt="Logo" class="logo-clear">
           <p class="greeting" id="greetingText">Welcome</p>
           <h1 class="title">PVHS Tools</h1>
-          <p class="subtitle">Quick access to campus tools and directory.</p>
+          <p class="subtitle">Quick access to staff tools, classroom countdown and directory.</p>
         </div>
         <div class="launcher-stack">
           <a class="nav-link launch-card" href="countdown.html"><h2 class="launch-label">Countdown</h2></a>
@@ -262,7 +271,16 @@
     }
 
     const hours = new Date().getHours();
-    const greet = hours < 12 ? "Good Morning" : hours < 18 ? "Good Afternoon" : "Good Evening";
+    let greet = "Good Morning";
+    if (hours >= 21 || hours < 5) {
+      greet = "Good Night";
+    } else if (hours < 12) {
+      greet = "Good Morning";
+    } else if (hours < 17) {
+      greet = "Good Afternoon";
+    } else {
+      greet = "Good Evening";
+    }
     document.getElementById('greetingText').textContent = greet;
 
     document.getElementById("popoutBtn")?.addEventListener("click", () => {
