@@ -65,15 +65,15 @@
     
     .top-actions { width: 100%; display: flex; justify-content: flex-end; min-height: 34px; }
     
-    /* REPAIRED POP OUT PILL - 1:1 MATCH TO COMBO PILLS */
+    /* THE FIXED POP OUT BUTTON */
     .popout-pill {
       appearance: none;
       background: rgba(255, 255, 255, 0.08); 
       border: 1px solid var(--panel-border);
-      border-radius: 14px; 
-      padding: 10px 12px; 
+      border-radius: 12px; 
+      padding: 10px 14px; 
       color: #fff; 
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 900; 
       text-transform: uppercase; 
       cursor: pointer; 
@@ -89,6 +89,8 @@
     .logo-clear { width: 80px; height: auto; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.24)); }
     .title { margin: 0; font-size: clamp(34px, 10vw, 48px); line-height: 1; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; text-align: center; }
     .greeting { margin: 0; font-size: 14px; font-weight: 800; color: #00d1d1; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+    
+    /* Subtitle - Centered */
     .subtitle { margin: 0; max-width: 280px; font-size: 13px; line-height: 1.4; font-weight: 700; color: var(--muted); text-wrap: balance; text-align: center; }
 
     .launcher-stack { width: 100%; display: flex; flex-direction: column; gap: 12px; }
@@ -97,7 +99,7 @@
       width: 100%; border-radius: 24px; background: var(--panel); border: 1px solid var(--panel-border);
       box-shadow: var(--soft-shadow); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
       text-decoration: none; color: var(--white); padding: 20px 18px;
-      display: flex; align-items: center; justify-content: center; /* PERFECTLY CENTERED */
+      display: flex; align-items: center; justify-content: center; /* PERFECTLY CENTERED BUTTON CONTENT */
       transition: background 0.2s, transform 0.1s;
     }
 
