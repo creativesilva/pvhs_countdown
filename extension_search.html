@@ -19,7 +19,7 @@
       --panel: rgba(255,255,255,0.08);
       --panel-border: rgba(255,255,255,0.12);
       --shadow: 0 20px 46px rgba(0,0,0,0.30);
-      --app-spacing: 16px; /* Symmetrical margin variable */
+      --app-spacing: 16px; /* Perfect symmetry for sides and bottom */
       --radius: 34px;
     }
 
@@ -52,6 +52,7 @@
     }
 
     .content { position: relative; z-index: 1; width: 100%; height: 100%; display: flex; flex-direction: column; gap: 12px; }
+    
     .top-actions { width: 100%; display: flex; justify-content: flex-end; align-items: center; margin-bottom: 4px; }
     
     .popout-btn {
@@ -133,6 +134,7 @@
   <script>
     const extensionSearch = [
       { name: "PVHS Emergency Line", role: "Emergency", extension: "5000", keywords: ["emergency", "urgent"] },
+      { name: "PVHS Maintenance", role: "Emergency", extension: "878-8155", keywords: ["maintenance", "maint", "urgent"] },
       { name: "Julie Norris", role: "Maintenance Secretary", extension: "5275", department: "Maintenance" },
       { name: "Chris Silva", role: "Visual and Performing Arts / Teacher", extension: "5322", room: "322", keywords: ["photography", "art"] },
       { name: "Laura Garcia Solorio", role: "Visual and Performing Arts / Teacher", extension: "5322", room: "322" },
@@ -210,11 +212,13 @@
         results = extensionSearch.filter(e => defaultSuggestions.includes(e.name));
         resultCount.textContent = "Recommended Contacts";
       } else {
+        // Direct match check
         results = extensionSearch.filter(e => {
           const searchSpace = [e.name, e.role, e.department, e.extension, e.room, ...(e.keywords || [])].join(" ").toLowerCase();
           return searchSpace.includes(q);
         });
 
+        // Typos/Phonetic check (only if direct search fails)
         if (results.length === 0 && q.length > 2) {
           results = extensionSearch
             .map(e => ({ ...e, dist: getLevenshteinDistance(q, e.name.toLowerCase().split(' ').pop()) }))
@@ -227,7 +231,7 @@
       resultsList.innerHTML = results.length ? "" : '<p style="text-align:center; padding:20px; opacity:0.6; font-size:12px;">NO MATCHES FOUND</p>';
 
       results.forEach(entry => {
-        // Automatically check if it's an extension or full phone number
+        // Dynamic labeling: 4 digits = Ext, more = Phone
         const isPhoneNumber = entry.extension.replace(/[^0-9]/g, "").length > 4;
         const label = isPhoneNumber ? "Phone" : "Ext";
 
