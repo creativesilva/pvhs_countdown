@@ -65,7 +65,6 @@
       width: 100%; gap: 8px; height: 44px; flex-shrink: 0; margin-bottom: 6px;
     }
 
-    /* Flat Action Pill (Matches Index) */
     .action-pill { 
       display: flex; background: rgba(255, 255, 255, 0.08); border: 1px solid var(--panel-border); 
       border-radius: 12px; overflow: hidden; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
@@ -82,26 +81,16 @@
     .period-card { padding: 18px 14px; display: flex; flex-direction: column; align-items: center; gap: 2px; flex-shrink: 0; }
     .school-card { padding: 18px 14px; text-align: center; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
 
-    /* THE FIX: Specifically shorter padding for weather card */
+    /* New Shorter Weather Card */
     .weather-card { 
-      padding: 10px 14px; /* Shorter padding */
-      text-align: center; 
-      flex-shrink: 0; 
-      display: flex; 
-      flex-direction: column; 
-      align-items: center;
+      padding: 14px 14px; text-align: center; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
     }
-    .weather-text {
-      font-size: 11px;
-      font-weight: 800;
-      color: #d9f2f2;
-      text-transform: uppercase;
-      margin: 0;
-    }
+    .weather-label { font-size: 11px; font-weight: 800; color: var(--muted); text-transform: uppercase; margin: 0; letter-spacing: 0.5px;}
+    .weather-text { font-size: 18px; font-weight: 900; color: #ffffff; text-transform: uppercase; margin: 0; letter-spacing: 0.5px;}
 
     .block-label { font-size: clamp(20px, 6vw, 26px); line-height: 1; font-weight: 900; text-transform: uppercase; margin: 0; color: #00d1d1; text-align: center; }
     
-    /* DYNAMIC TIMER SCALING - Never clips */
+    /* DYNAMIC TIMER SCALING */
     .timer { 
       font-size: 22cqw; 
       line-height: 0.9; font-weight: 900; letter-spacing: -3px; margin: 8px 0; text-shadow: 0 10px 26px rgba(0,0,0,0.30); 
@@ -118,9 +107,9 @@
     .detail-row { font-size: 11px; color: #d9f2f2; margin: 2px 0; font-weight: 800; text-transform: uppercase; text-align: center; }
     .detail-row strong { color: #ffffff; }
 
-    .footer-note { margin-top: auto; padding: 20px 0 4px 0; font-size: 10px; color: #b5d4d4; text-transform: uppercase; font-weight: 800; text-align: center; flex-shrink: 0; }
+    .footer-note { margin-top: auto; padding: 12px 0 4px 0; font-size: 10px; color: #b5d4d4; text-transform: uppercase; font-weight: 800; text-align: center; flex-shrink: 0; }
 
-    /* Phone Override: Protected if in Pop-Out Mode */
+    /* Phone Override */
     @media (max-width: 430px) {
       body:not(.is-popout) .frame { align-items: flex-start; padding: 0; }
       body:not(.is-popout) .app { width: 100vw; height: 100dvh; max-height: none; border-radius: 0; border: none; }
@@ -161,7 +150,8 @@
         </div>
 
         <div class="card weather-card">
-          <p class="weather-text">nano benana</p>
+          <p class="weather-label">Santa Maria, CA</p>
+          <p class="weather-text" id="weatherText">Loading...</p>
         </div>
 
         <div class="footer-note">CREATED BY: MR. SILVA</div>
@@ -177,7 +167,7 @@
     const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
 
     const popoutSection = document.getElementById("popoutSection");
-    const popoutBtn = document.getElementById("popoutBtn"); 
+    const popoutBtn = document.getElementById("popoutBtn");
     const navLinks = document.querySelectorAll(".nav-link");
 
     // PERSISTENT UI LOGIC
@@ -260,9 +250,39 @@
     function parseToSec(t) { const [h,m] = t.split(":").map(Number); return (h*3600)+(m*60); }
     setInterval(updateApp, 1000); updateApp();
 
-    popoutBtn?.addEventListener("click", () => {
-      window.open('countdown.html?mode=popout', 'pvPop', 'width=450,height=900,resizable=yes,scrollbars=no');
-    });
+    // LIVE WEATHER FETCH (Santa Maria, CA)
+    async function fetchWeather() {
+      try {
+        const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=34.9530&longitude=-120.4357&current_weather=true&temperature_unit=fahrenheit');
+        const data = await res.json();
+        const temp = Math.round(data.current_weather.temperature);
+        const code = data.current_weather.weathercode;
+        
+        let desc = "☁️ Weather";
+        if (code === 0) desc = "☀️ Clear";
+        else if (code === 1) desc = "🌤️ Mostly Clear";
+        else if (code === 2) desc = "⛅ Partly Cloudy";
+        else if (code === 3) desc = "☁️ Overcast";
+        else if (code === 45 || code === 48) desc = "🌫️ Fog";
+        else if (code >= 51 && code <= 55) desc = "🌧️ Drizzle";
+        else if (code >= 61 && code <= 65) desc = "🌧️ Rain";
+        else if (code >= 71 && code <= 77) desc = "❄️ Snow";
+        else if (code >= 80 && code <= 82) desc = "🌧️ Showers";
+        else if (code >= 95) desc = "⛈️ Thunderstorm";
+
+        document.getElementById('weatherText').textContent = `${desc} | ${temp}°F`;
+      } catch (err) {
+        document.getElementById('weatherText').textContent = "Weather Unavailable";
+      }
+    }
+    fetchWeather(); // Fetch immediately on load
+    setInterval(fetchWeather, 900000); // Refresh every 15 minutes
+
+    if (popoutBtn) {
+      popoutBtn.addEventListener("click", () => {
+        window.open('countdown.html?mode=popout', 'pvPop', 'width=450,height=900,resizable=yes,scrollbars=no');
+      });
+    }
   </script>
 </body>
 </html>
