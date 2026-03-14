@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#007474">
   <link rel="apple-touch-icon" href="PV_Logo.png">
   <link rel="icon" type="image/png" sizes="192x192" href="PV_Logo.png">
-  <title>PVHS Extension Search</title>
+  <title>Extension Search</title>
 
   <style>
     :root {
@@ -19,7 +19,7 @@
       --panel: rgba(255,255,255,0.08);
       --panel-border: rgba(255,255,255,0.12);
       --shadow: 0 20px 46px rgba(0,0,0,0.30);
-      --app-spacing: 16px; /* Perfect symmetry for sides and bottom */
+      --app-spacing: 16px;
       --radius: 34px;
     }
 
@@ -29,7 +29,8 @@
 
     .frame {
       width: 100%; height: 100dvh; display: flex; align-items: center; justify-content: center;
-      padding: env(safe-area-inset-top) 12px env(safe-area-inset-bottom) 12px;
+      background: #021414; /* Ensures dark background behind the app */
+      padding: 10px;
     }
 
     .app {
@@ -63,7 +64,7 @@
 
     .topbar { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
     .logo-clear { width: 48px; height: auto; }
-    .page-title { flex: 1; font-size: 16px; font-weight: 900; color: #dff7f7; text-transform: uppercase; margin: 0; text-align: center;}
+    .page-title { flex: 1; font-size: 15px; font-weight: 900; color: #dff7f7; text-transform: uppercase; margin: 0; text-align: center; letter-spacing: 0.5px;}
     
     .home-link {
       padding: 8px 12px; border-radius: 14px; background: rgba(255,255,255,0.1);
@@ -79,7 +80,7 @@
     .search-card { padding: 18px 14px; flex-shrink: 0; }
     .results-card { padding: 14px 14px 0 14px; text-align: left; flex: 1; overflow: hidden; display: flex; flex-direction: column; }
 
-    .search-title { margin: 0 0 2px 0; font-size: 28px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; }
+    .search-title { margin: 0 0 2px 0; font-size: 26px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; }
     .helper-text { margin: 0 0 14px 0; font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase; }
 
     .search-input {
@@ -98,7 +99,8 @@
 
     .footer-note { margin-top: auto; padding: 10px 0 4px 0; font-size: 8px; color: #b5d4d4; text-transform: uppercase; font-weight: 800; opacity: 0.6; text-align: center; letter-spacing: 1px; }
 
-    @media (max-width: 450px) {
+    /* Reduced mobile breakpoint so popout keeps its shape */
+    @media (max-width: 380px) {
       .app { border-radius: 0; border: none; width: 100%; height: 100dvh; aspect-ratio: auto; }
       .frame { padding: 0; }
     }
@@ -114,7 +116,7 @@
         </div>
         <div class="topbar">
           <img src="PV_Logo.png" alt="Logo" class="logo-clear">
-          <h1 class="page-title">PVHS Search</h1>
+          <h1 class="page-title">Extension Search</h1>
           <a class="home-link" href="index.html">Home</a>
         </div>
         <div class="search-card">
@@ -212,13 +214,11 @@
         results = extensionSearch.filter(e => defaultSuggestions.includes(e.name));
         resultCount.textContent = "Recommended Contacts";
       } else {
-        // Direct match check
         results = extensionSearch.filter(e => {
           const searchSpace = [e.name, e.role, e.department, e.extension, e.room, ...(e.keywords || [])].join(" ").toLowerCase();
           return searchSpace.includes(q);
         });
 
-        // Typos/Phonetic check (only if direct search fails)
         if (results.length === 0 && q.length > 2) {
           results = extensionSearch
             .map(e => ({ ...e, dist: getLevenshteinDistance(q, e.name.toLowerCase().split(' ').pop()) }))
@@ -231,7 +231,6 @@
       resultsList.innerHTML = results.length ? "" : '<p style="text-align:center; padding:20px; opacity:0.6; font-size:12px;">NO MATCHES FOUND</p>';
 
       results.forEach(entry => {
-        // Dynamic labeling: 4 digits = Ext, more = Phone
         const isPhoneNumber = entry.extension.replace(/[^0-9]/g, "").length > 4;
         const label = isPhoneNumber ? "Phone" : "Ext";
 
