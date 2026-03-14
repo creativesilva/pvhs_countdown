@@ -3,10 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="PVHS Tools">
   <meta name="theme-color" content="#007474">
+  
   <link rel="apple-touch-icon" href="PV_Logo.png">
   <link rel="icon" type="image/png" sizes="192x192" href="PV_Logo.png">
   <title>PVHS Tools</title>
@@ -24,17 +26,34 @@
       --app-spacing: 18px;
     }
 
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; background: #021414; }
-    body { font-family: Arial, Helvetica, sans-serif; color: var(--white); touch-action: pan-y; }
+    * { 
+      box-sizing: border-box; 
+      -webkit-tap-highlight-color: transparent; 
+      margin: 0; padding: 0;
+    }
+
+    html, body { 
+      width: 100%; height: 100%; 
+      background: #021414; 
+      overflow: hidden; 
+    }
+
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; 
+      color: var(--white); 
+      /* Strictly disable zooming */
+      touch-action: none; 
+    }
 
     .frame {
-      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
-      padding: max(12px, env(safe-area-inset-top)) 12px max(12px, env(safe-area-inset-bottom)) 12px;
+      width: 100%; height: 100dvh;
+      display: flex; align-items: center; justify-content: center;
+      padding: env(safe-area-inset-top) 12px env(safe-area-inset-bottom) 12px;
     }
 
     .app {
       width: min(100%, 430px);
+      height: 100%;
       aspect-ratio: 430 / 880;
       max-height: calc(100dvh - 24px);
       border-radius: 34px;
@@ -44,7 +63,7 @@
       border: 1px solid rgba(255,255,255,0.12);
       background: radial-gradient(circle at center, rgba(10,34,34,0.94) 0%, rgba(4,20,20,0.98) 46%, rgba(0,116,116,1) 100%);
       display: flex; flex-direction: column;
-      padding: 20px var(--app-spacing) var(--app-spacing) var(--app-spacing);
+      padding: 10px var(--app-spacing) var(--app-spacing) var(--app-spacing);
       isolation: isolate;
     }
 
@@ -61,42 +80,51 @@
       pointer-events: none; z-index: 0;
     }
 
-    .content { position: relative; z-index: 1; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; gap: 14px; }
-    
-    .top-actions { width: 100%; display: flex; justify-content: flex-end; min-height: 34px; }
-    
-    /* SLEEK MATCHED POP OUT BUTTON */
+    /* Scrollable Inner Content to prevent cut-off */
+    .content { 
+      position: relative; z-index: 1; width: 100%; height: 100%; 
+      display: flex; flex-direction: column; align-items: center; 
+      overflow-y: auto; -webkit-overflow-scrolling: touch;
+    }
+
+    .top-actions { 
+      width: 100%; height: 44px; 
+      display: flex; justify-content: flex-end; align-items: center; 
+      flex-shrink: 0; 
+    }
+
+    /* Standardized Pop Out Pill - Match Style properly */
     .popout-pill {
+      display: none; /* Controlled by JS */
       appearance: none;
       background: rgba(255, 255, 255, 0.08); 
       border: 1px solid var(--panel-border);
-      border-radius: 12px; 
-      padding: 10px 14px; 
+      border-radius: 14px; 
+      padding: 9px 12px; 
       color: #fff; 
-      font-size: 10px;
-      font-weight: 900; 
-      text-transform: uppercase; 
-      cursor: pointer; 
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      /* FIXED: Removed heavy shadow to match combo style */
+      font-size: 11px; font-weight: 900; 
+      text-transform: uppercase; cursor: pointer; 
+      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+      box-shadow: var(--soft-shadow);
       transition: background 0.2s, transform 0.1s;
     }
 
     .popout-pill:active { transform: scale(0.96); background: var(--card-hover); }
 
-    .header { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .logo-clear { width: 80px; height: auto; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.24)); }
+    /* Moving content higher up */
+    .header { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 4px; margin-top: -10px; }
+    .logo-clear { width: 76px; height: auto; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.24)); }
+    
     .title { margin: 0; font-size: clamp(34px, 10vw, 48px); line-height: 1; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; text-align: center; }
-    .greeting { margin: 0; font-size: 14px; font-weight: 800; color: #00d1d1; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
-    .subtitle { margin: 0; max-width: 280px; font-size: 13px; line-height: 1.4; font-weight: 700; color: var(--muted); text-wrap: balance; text-align: center; }
+    .greeting { margin: 6px 0 0 0; font-size: 13px; font-weight: 800; color: #00d1d1; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+    .subtitle { margin: 4px 0 14px 0; max-width: 280px; font-size: 13px; line-height: 1.4; font-weight: 700; color: var(--muted); text-wrap: balance; text-align: center; }
 
-    .launcher-stack { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+    .launcher-stack { width: 100%; display: flex; flex-direction: column; gap: 12px; margin-bottom: 12px; }
 
     .launch-card {
       width: 100%; border-radius: 24px; background: var(--panel); border: 1px solid var(--panel-border);
       box-shadow: var(--soft-shadow); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
-      text-decoration: none; color: var(--white); padding: 20px 18px;
+      text-decoration: none; color: var(--white); padding: 22px 18px;
       display: flex; align-items: center; justify-content: center; /* Centered Text */
       transition: background 0.2s, transform 0.1s;
     }
@@ -107,7 +135,7 @@
     .quick-links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
 
     .quick-link-btn {
-      display: flex; align-items: center; justify-content: center; min-height: 54px;
+      display: flex; align-items: center; justify-content: center; min-height: 56px;
       padding: 10px; border-radius: 18px; text-decoration: none; color: #fff;
       background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
       backdrop-filter: blur(4px); text-align: center; transition: background 0.2s;
@@ -116,11 +144,12 @@
     .quick-link-btn:active { transform: scale(0.97); background: var(--card-hover); }
     .quick-link-label { margin: 0; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.2; text-align: center; }
 
-    .footer-note { margin-top: auto; padding-top: 8px; font-size: 10px; color: #b5d4d4; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; text-align: center; }
+    .footer-note { margin-top: auto; padding: 12px 0 4px 0; font-size: 10px; color: #b5d4d4; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; text-align: center; flex-shrink: 0; }
 
     @media (max-width: 430px) {
       .frame { align-items: flex-start; }
-      .app { width: 100%; aspect-ratio: auto; min-height: calc(100dvh - 24px); border-radius: 28px; }
+      .app { width: 100%; height: calc(100dvh - 24px); aspect-ratio: auto; border-radius: 28px; }
+      body { touch-action: pan-y; } /* Allow swipe logic but not zoom */
     }
   </style>
 </head>
@@ -128,8 +157,8 @@
   <div class="frame">
     <div class="app">
       <img src="PV_Logo.png" alt="" class="ghost-logo">
-
       <div class="content">
+        
         <div class="top-actions">
           <button id="popoutBtn" class="popout-pill" type="button">Pop Out</button>
         </div>
@@ -142,28 +171,15 @@
         </div>
 
         <div class="launcher-stack">
-          <a class="launch-card" href="countdown.html">
-            <h2 class="launch-label">Classroom Countdown</h2>
-          </a>
-
-          <a class="launch-card" href="extension_search.html">
-            <h2 class="launch-label">Search Directory</h2>
-          </a>
+          <a class="launch-card" href="countdown.html"><h2 class="launch-label">Countdown</h2></a>
+          <a class="launch-card" href="extension_search.html"><h2 class="launch-label">Directory</h2></a>
         </div>
 
         <div class="quick-links-grid">
-          <a class="quick-link-btn" href="https://maintenance.facilitron.com/anonymous/SantaMariaJUHSD/newworkorder" target="_blank">
-            <p class="quick-link-label">Maintenance</p>
-          </a>
-          <a class="quick-link-btn" href="https://smjuhsd.incidentiq.com/" target="_blank">
-            <p class="quick-link-label">IT Support</p>
-          </a>
-          <a class="quick-link-btn" href="https://login.frontlineeducation.com/login" target="_blank">
-            <p class="quick-link-label">Absences</p>
-          </a>
-          <a class="quick-link-btn" href="https://smjuhsd-my.sharepoint.com/:x:/g/personal/etorres_smjuhsd_org/IQBiSObgdkR3R68_dXHYrDwfAbA5RpN-scClTiKQddgcsLU" target="_blank">
-            <p class="quick-link-label">In Lieu</p>
-          </a>
+          <a class="quick-link-btn" href="https://maintenance.facilitron.com/anonymous/SantaMariaJUHSD/newworkorder" target="_blank"><p class="quick-link-label">Maintenance</p></a>
+          <a class="quick-link-btn" href="https://smjuhsd.incidentiq.com/" target="_blank"><p class="quick-link-label">IT Support</p></a>
+          <a class="quick-link-btn" href="https://login.frontlineeducation.com/login" target="_blank"><p class="quick-link-label">Absences</p></a>
+          <a class="quick-link-btn" href="https://smjuhsd-my.sharepoint.com/:x:/g/personal/etorres_smjuhsd_org/IQBiSObgdkR3R68_dXHYrDwfAbA5RpN-scClTiKQddgcsLU" target="_blank"><p class="quick-link-label">In Lieu</p></a>
         </div>
 
         <div class="footer-note">CREATED BY: MR. SILVA</div>
@@ -172,12 +188,19 @@
   </div>
 
   <script>
+    // Intelligent platform detection
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+    const popoutBtn = document.getElementById("popoutBtn");
+
+    // Only show "Pop Out" button if on Desktop browser AND not already popped out
+    if (!isMobile && !isStandalone && !window.location.search.includes('popout=true')) {
+      popoutBtn.style.display = 'block';
+    }
+
     const hours = new Date().getHours();
     const greet = hours < 12 ? "Good Morning" : hours < 18 ? "Good Afternoon" : "Good Evening";
     document.getElementById('greetingText').textContent = greet;
-
-    const popoutBtn = document.getElementById("popoutBtn");
-    if (window.location.search.includes('popout=true')) popoutBtn.style.display = 'none';
 
     popoutBtn.addEventListener("click", () => {
       const width = 460; const height = 980;
