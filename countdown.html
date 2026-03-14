@@ -21,23 +21,23 @@
       --white-gradient: linear-gradient(180deg, #ffffff 0%, #dceaea 100%);
       --red-gradient: linear-gradient(180deg, #ffb8b8 0%, #ff5b5b 58%, #b80000 100%);
       --green-gradient: linear-gradient(180deg, #d2ffcf 0%, #5bff61 58%, #00b806 100%);
-      --soft-shadow: 0 12px 24px rgba(0,0,0,0.22);
+      --soft-shadow: 0 12px 24px rgba(0,0,0,0.22); --card-hover: rgba(255,255,255,0.12);
     }
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
     html, body { width: 100%; height: 100%; background: #021414; overflow: hidden; }
     body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; color: var(--white); touch-action: none; user-select: none; }
 
-    /* The Frame ensures the app stays centered with margins when resized on desktop */
+    /* The Frame ensures app stays centered with margins on Desktop/Popout */
     .frame { 
       width: 100%; height: 100dvh; display: flex; align-items: center; justify-content: center; 
       padding: 10px;
     }
 
-    /* Locked iPhone Bubble Shape */
+    /* THE PERMANENT IPHONE BUBBLE */
     .app {
       width: 430px; height: 880px; max-width: 100%; max-height: 100%;
-      aspect-ratio: 430 / 880; border-radius: var(--radius); 
+      border-radius: var(--radius); 
       overflow: hidden; position: relative; box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,0.12);
       background: radial-gradient(circle at center, rgba(10,34,34,0.94) 0%, rgba(4,20,20,0.98) 46%, rgba(0,116,116,1) 100%);
       display: flex; flex-direction: column; padding: 10px var(--app-spacing) var(--app-spacing) var(--app-spacing);
@@ -60,17 +60,18 @@
       overflow-y: auto; -webkit-overflow-scrolling: touch;
     }
 
-    /* Header in one single line */
     .top-row {
       display: flex; align-items: center; justify-content: space-between;
       width: 100%; gap: 8px; height: 44px; flex-shrink: 0; margin-bottom: 6px;
     }
 
+    /* Flat Action Pill */
     .action-pill { 
       display: flex; background: rgba(255, 255, 255, 0.08); border: 1px solid var(--panel-border); 
-      border-radius: 12px; overflow: hidden; backdrop-filter: blur(4px);
+      border-radius: 12px; overflow: hidden; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
     }
-    .pill-btn { appearance: none; background: transparent; border: none; color: #fff; font-size: 10px; font-weight: 900; text-transform: uppercase; padding: 8px 12px; cursor: pointer; text-decoration: none; display: flex; align-items: center; }
+    .pill-btn { appearance: none; background: transparent; border: none; color: #fff; font-size: 10px; font-weight: 900; text-transform: uppercase; padding: 8px 12px; cursor: pointer; text-decoration: none; display: flex; align-items: center; transition: background 0.2s; }
+    .pill-btn:active { background: var(--card-hover); }
     .pill-divider { width: 1px; background: var(--panel-border); height: 100%; }
 
     .logo-clear { width: 42px; height: auto; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.24)); flex-shrink: 0; }
@@ -83,7 +84,7 @@
 
     .block-label { font-size: clamp(20px, 6vw, 26px); line-height: 1; font-weight: 900; text-transform: uppercase; margin: 0; color: #00d1d1; text-align: center; }
     
-    /* Dynamic scaling to prevent clipping */
+    /* DYNAMIC TIMER SCALING - Never clips */
     .timer { 
       font-size: 22cqw; 
       line-height: 0.9; font-weight: 900; letter-spacing: -3px; margin: 8px 0; text-shadow: 0 10px 26px rgba(0,0,0,0.30); 
@@ -100,13 +101,14 @@
     .detail-row { font-size: 11px; color: #d9f2f2; margin: 2px 0; font-weight: 800; text-transform: uppercase; text-align: center; }
     .detail-row strong { color: #ffffff; }
 
-    .footer-note { margin-top: auto; padding: 20px 0 4px 0; font-size: 10px; color: #b5d4d4; text-transform: uppercase; font-weight: 800; text-align: center; flex-shrink: 0; }
+    .footer-note { margin-top: auto; padding: 12px 0 4px 0; font-size: 10px; color: #b5d4d4; text-transform: uppercase; font-weight: 800; text-align: center; flex-shrink: 0; }
 
-    /* Phone Override: Only used if NOT in popout mode */
+    /* Phone Override: Protected if in Pop-Out Mode */
     @media (max-width: 430px) {
       body:not(.is-popout) .frame { align-items: flex-start; padding: 0; }
       body:not(.is-popout) .app { width: 100vw; height: 100dvh; max-height: none; border-radius: 0; border: none; }
       .popout-pill { display: none !important; }
+      body { touch-action: pan-y; }
     }
   </style>
 </head>
@@ -119,7 +121,7 @@
           <img src="PV_Logo.png" alt="Logo" class="logo-clear">
           <h1 class="page-title">Countdown</h1>
           <div class="action-pill">
-            <a id="homeLink" href="index.html" class="pill-btn">Home</a>
+            <a href="index.html" class="pill-btn nav-link">Home</a>
             <div id="popoutSection" style="display: none;">
               <div class="pill-divider"></div>
               <button id="popoutBtn" class="pill-btn" type="button">Pop Out</button>
@@ -154,14 +156,19 @@
     const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
 
     const popoutSection = document.getElementById("popoutSection");
-    const homeLink = document.getElementById("homeLink");
+    const navLinks = document.querySelectorAll(".nav-link");
 
+    // PERSISTENT UI LOGIC
     if (isPopout) {
       document.body.classList.add('is-popout');
-      popoutSection.remove();
-      homeLink.href = "index.html?mode=popout";
+      if (popoutSection) popoutSection.remove(); 
+      navLinks.forEach(link => {
+        const url = new URL(link.href, window.location.origin);
+        url.searchParams.set('mode', 'popout');
+        link.href = url.toString();
+      });
     } else if (!isMobile && !isStandalone) {
-      popoutSection.style.display = 'flex';
+      if (popoutSection) popoutSection.style.display = 'flex';
     }
 
     const timeZone = "America/Los_Angeles";
@@ -231,7 +238,7 @@
     function parseToSec(t) { const [h,m] = t.split(":").map(Number); return (h*3600)+(m*60); }
     setInterval(updateApp, 1000); updateApp();
 
-    popoutBtn.addEventListener("click", () => {
+    document.getElementById("popoutBtn")?.addEventListener("click", () => {
       window.open('countdown.html?mode=popout', 'pvPop', 'width=450,height=900,resizable=yes,scrollbars=no');
     });
   </script>
