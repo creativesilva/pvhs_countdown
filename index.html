@@ -21,7 +21,7 @@
       --shadow: 0 20px 46px rgba(0,0,0,0.30);
       --soft-shadow: 0 12px 24px rgba(0,0,0,0.22);
       --card-hover: rgba(255,255,255,0.12);
-      --app-spacing: 18px;
+      --app-spacing: 18px; /* Consistent padding for all pages */
     }
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -35,6 +35,7 @@
 
     .app {
       width: min(100%, 430px);
+      height: 100%;
       aspect-ratio: 430 / 880;
       max-height: calc(100dvh - 24px);
       border-radius: 34px;
@@ -89,8 +90,8 @@
 
     .launch-card:active { transform: scale(0.98); background: var(--card-hover); }
 
-    .launch-label { margin: 0; font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; }
-    .chevron { width: 20px; height: 20px; opacity: 0.5; }
+    .launch-label { margin: 0; font-size: 18px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; }
+    .chevron { width: 18px; height: 18px; opacity: 0.5; }
 
     .quick-links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
 
@@ -105,7 +106,7 @@
 
     .quick-link-label { margin: 0; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.2; }
 
-    .footer-note { margin-top: auto; padding-top: 8px; font-size: 9px; color: #b5d4d4; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; }
+    .footer-note { margin-top: auto; padding-top: 8px; font-size: 10px; color: #b5d4d4; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; text-align: center; }
 
     @media (max-width: 430px) {
       .frame { align-items: flex-start; }
@@ -132,12 +133,12 @@
 
         <div class="launcher-stack">
           <a class="launch-card" href="countdown.html">
-            <h2 class="launch-label">Countdown</h2>
+            <h2 class="launch-label">Classroom Countdown</h2>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
           </a>
 
           <a class="launch-card" href="extension_search.html">
-            <h2 class="launch-label">Search</h2>
+            <h2 class="launch-label">Search Directory</h2>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
           </a>
         </div>
@@ -157,28 +158,21 @@
           </a>
         </div>
 
-        <div class="footer-note">Created By: Mr. Silva</div>
+        <div class="footer-note">CREATED BY: MR. SILVA</div>
       </div>
     </div>
   </div>
 
   <script>
-    // Set dynamic greeting
     const hours = new Date().getHours();
     const greet = hours < 12 ? "Good Morning" : hours < 18 ? "Good Afternoon" : "Good Evening";
     document.getElementById('greetingText').textContent = greet;
 
-    // Popout Logic
     const popoutBtn = document.getElementById("popoutBtn");
-    
-    // Hide popout button if already in a popped out window
-    if (window.location.search.includes('popout=true')) {
-      popoutBtn.style.display = 'none';
-    }
+    if (window.location.search.includes('popout=true')) popoutBtn.style.display = 'none';
 
     popoutBtn.addEventListener("click", () => {
-      const width = 460;
-      const height = 980;
+      const width = 460; const height = 980;
       const left = (window.screen.width - width) / 2;
       const top = (window.screen.height - height) / 2;
       window.open(window.location.href + '?popout=true', 'pvTools', `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=no`);
