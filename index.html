@@ -26,30 +26,28 @@
     html, body { 
       width: 100%; height: 100%; 
       background: #021414; 
-      overflow: hidden; /* Locks the browser window */
+      overflow: hidden; 
     }
 
     body { 
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+      font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; 
       color: var(--white); 
-      touch-action: pan-y; /* Allows scrolling but kills pinch-zoom */
+      touch-action: pan-y; 
       user-select: none;
     }
 
-    /* Centering Frame for Desktop/Browser view */
     .frame {
       width: 100%; height: 100dvh;
       display: flex; align-items: center; justify-content: center;
-      padding: env(safe-area-inset-top) 10px env(safe-area-inset-bottom) 10px;
+      padding: 12px;
     }
 
-    /* THE LOCKED IPHONE BUBBLE: Maintains shape on desktop/popout */
+    /* THE LOCKED IPHONE BUBBLE */
     .app {
       width: 430px; 
       height: 880px; 
       max-width: 100%; 
-      max-height: 95dvh; /* Keeps the bubble visible above browser bars */
-      aspect-ratio: 430 / 880;
+      max-height: 100%;
       border-radius: 34px; 
       overflow: hidden; 
       position: relative;
@@ -69,18 +67,17 @@
 
     .ghost-logo { position: absolute; top: 56%; left: 50%; width: 182%; opacity: 0.07; transform: translate(-50%, -50%); filter: grayscale(100%) contrast(108%) brightness(114%); pointer-events: none; z-index: 0; }
     
-    /* Scrollable internal content area */
     .content { 
       position: relative; z-index: 1; width: 100%; height: 100%; 
       display: flex; flex-direction: column; align-items: center; 
-      overflow-y: auto; /* Internal scrolling if content is too tall */
+      overflow-y: auto; 
       -webkit-overflow-scrolling: touch;
       padding: 10px var(--app-spacing) 20px var(--app-spacing);
     }
     
     .top-actions { width: 100%; height: 44px; display: flex; justify-content: flex-end; align-items: center; flex-shrink: 0; }
 
-    /* FLAT STYLE POP OUT - No drop shadow */
+    /* FLAT STYLE POP OUT */
     .popout-pill {
       display: none; appearance: none;
       background: rgba(255, 255, 255, 0.08); 
@@ -91,10 +88,9 @@
       backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
     }
 
-    /* Content Layout Adjustments */
     .header { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 4px; margin-top: -5px; }
     .logo-clear { width: 76px; height: auto; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.24)); }
-    .title { margin: 0; font-size: clamp(32px, 10vw, 42px); font-weight: 900; text-transform: uppercase; letter-spacing: -1px; text-align: center; }
+    .title { margin: 0; font-size: 42px; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; text-align: center; }
     .greeting { margin: 6px 0 0 0; font-size: 13px; font-weight: 800; color: #00d1d1; text-transform: uppercase; letter-spacing: 1px; }
     .subtitle { margin: 4px 0 14px 0; max-width: 280px; font-size: 13px; line-height: 1.4; font-weight: 700; color: var(--muted); text-align: center; }
 
@@ -119,10 +115,10 @@
 
     .footer-note { margin-top: auto; padding: 20px 0 4px 0; font-size: 10px; color: #b5d4d4; text-transform: uppercase; font-weight: 800; text-align: center; flex-shrink: 0; }
 
-    /* Actual phone view: Fills screen but keeps proportions */
+    /* REAL PHONE OVERRIDE: Fills screen ONLY if not in Pop-Out mode */
     @media (max-width: 430px) {
-      .frame { align-items: flex-start; padding: 0; }
-      .app { width: 100vw; height: 100dvh; max-height: none; border-radius: 0; border: none; }
+      body:not(.is-popout) .frame { align-items: flex-start; padding: 0; }
+      body:not(.is-popout) .app { width: 100vw; height: 100dvh; max-height: none; border-radius: 0; border: none; }
       .popout-pill { display: none !important; }
     }
   </style>
@@ -163,26 +159,23 @@
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
 
-    const popoutBtn = document.getElementById("popoutBtn");
-    const navLinks = document.querySelectorAll(".nav-link");
-
-    // PERSISTENT LOGIC: Rewrite internal links and hide button permanently
     if (isPopout) {
-      popoutBtn.remove(); // Removes the button from the DOM entirely
-      navLinks.forEach(link => {
+      document.body.classList.add('is-popout');
+      document.getElementById("popoutBtn").remove();
+      document.querySelectorAll(".nav-link").forEach(link => {
         const url = new URL(link.href, window.location.origin);
         url.searchParams.set('mode', 'popout');
         link.href = url.toString();
       });
     } else if (!isMobile && !isStandalone) {
-      popoutBtn.style.display = 'block';
+      document.getElementById("popoutBtn").style.display = 'block';
     }
 
     const hours = new Date().getHours();
     const greet = hours < 12 ? "Good Morning" : hours < 18 ? "Good Afternoon" : "Good Evening";
     document.getElementById('greetingText').textContent = greet;
 
-    popoutBtn.addEventListener("click", () => {
+    document.getElementById("popoutBtn").addEventListener("click", () => {
       window.open('index.html?mode=popout', 'pvTools', 'width=430,height=880,resizable=no,scrollbars=no');
     });
   </script>
