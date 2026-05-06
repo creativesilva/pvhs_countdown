@@ -241,6 +241,7 @@
 
     /* ── NOTIFICATION BELL ─────────────────────────────── */
     body.is-embed #notifBtn { display: none; }
+    body.is-embed .sched-btn-row { display: none; }
 
     .embed-modal[hidden] { display: none; }
     .embed-modal {
@@ -822,7 +823,7 @@
           <div class="prog-sep"></div>
           <div class="prog-row">
             <div class="prog-meta">
-              <span class="prog-label" id="prLabel">Till Progress Report</span>
+              <span class="prog-label" id="prLabel">Till Finals 📝</span>
               <span class="prog-pct" id="prPct">—</span>
             </div>
             <div class="prog-track"><div class="prog-bar prog-bar--pr" id="prFill" style="width:0%"></div></div>
@@ -1769,31 +1770,27 @@
         setTxt('vacPct', '🎉');
       }
 
-      // ── 5. PROGRESS REPORTS ─────────────────────────────
-      const progressReports = ["2025-09-19","2025-10-31","2026-02-27","2026-04-24"];
-      const prStretches = [
-        { from: "2025-08-14", to: "2025-09-19" },
-        { from: "2025-09-19", to: "2025-10-31" },
-        { from: "2025-10-31", to: "2026-02-27" },
-        { from: "2026-02-27", to: "2026-04-24" }
-      ];
-      const nextPR = progressReports.find(d => dateStr <= d);
-      if (nextPR) {
-        const stretch = prStretches.find(s => s.to === nextPR);
-        if (stretch) {
-          const totalPRSDs  = schoolDays.filter(d => d >= stretch.from && d <= stretch.to).length;
-          const passedPRSDs = schoolDays.filter(d => d >= stretch.from && d < dateStr).length;
-          const prFrac = totalPRSDs > 0 ? passedPRSDs / totalPRSDs : 0;
-          const dToPR = schoolDays.filter(d => d >= dateStr && d <= nextPR).length;
-          const prRight = dToPR === 0 ? '🎉 Today!' : dToPR === 1 ? '1 Day' : `${dToPR} School Days`;
-          setFill('prFill', prFrac, 'prog-bar--pr');
-          setTxt('prPct',   prRight);
-          setTxt('prLabel', 'Till Progress Report');
-        }
+      // ── 5. FINALS COUNTDOWN ─────────────────────────────
+      const finalsDay1 = "2026-06-08";
+      const finalsDay3 = "2026-06-10";
+      const finalsStretchStart = "2026-04-13"; // spring break return
+      if (dateStr < finalsDay1) {
+        const totalFinalsSDs = schoolDays.filter(d => d >= finalsStretchStart && d <= finalsDay1).length;
+        const passedFinalsSDs = schoolDays.filter(d => d >= finalsStretchStart && d < dateStr).length;
+        const finalsFrac = totalFinalsSDs > 0 ? passedFinalsSDs / totalFinalsSDs : 0;
+        const dToFinals = schoolDays.filter(d => d >= dateStr && d < finalsDay1).length;
+        const finalsRight = dToFinals === 0 ? '🎉 Tomorrow!' : dToFinals === 1 ? '1 School Day' : `${dToFinals} School Days`;
+        setFill('prFill', finalsFrac, 'prog-bar--pr');
+        setTxt('prPct',   finalsRight);
+        setTxt('prLabel', 'Till Finals 📝');
+      } else if (dateStr <= finalsDay3) {
+        setFill('prFill', 1, 'prog-bar--pr');
+        setTxt('prLabel', 'Finals Week 📝');
+        setTxt('prPct',   'Good luck!');
       } else {
         setFill('prFill', 1, 'prog-bar--pr');
-        setTxt('prLabel', 'Progress Reports Done ✓');
-        setTxt('prPct',   '✓');
+        setTxt('prLabel', 'Finals Done ✓');
+        setTxt('prPct',   '☀️');
       }
     }
 
