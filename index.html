@@ -610,7 +610,7 @@
     .ath-tabs {
       display: flex; gap: 6px; overflow-x: auto; flex-shrink: 0; flex: 1;
       padding: 2px 0 8px 0; -webkit-overflow-scrolling: touch;
-      scrollbar-width: none; scroll-behavior: smooth; touch-action: pan-y;
+      scrollbar-width: none; scroll-behavior: smooth;
     }
     .ath-tabs::-webkit-scrollbar { display: none; }
     .ath-tab {
@@ -2488,7 +2488,7 @@
       }
       let x0 = 0, y0 = 0, live = false;
       document.addEventListener('touchstart', e => {
-        if (overlayOpen()) { live = false; return; }
+        if (overlayOpen() || e.target.closest('.ath-tabs')) { live = false; return; }
         x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; live = true;
       }, { passive: true });
       document.addEventListener('touchcancel', () => { live = false; }, { passive: true });
