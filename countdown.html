@@ -1203,7 +1203,10 @@
       const config = embedConfig[targetKey] || embedConfig.canvas;
       const src = new URL("countdown.html?mode=embed", window.location.href);
       if (config.mini) src.searchParams.set("view", "mini");
-      return `<iframe src="${src.toString()}" title="PVHS Classroom Countdown" width="100%" height="${config.height}" style="border:0;overflow:hidden;background:transparent;" loading="lazy" scrolling="no" allowtransparency="true" allowfullscreen></iframe>`;
+      const style = config.mini
+        ? "border:0;overflow:hidden;background:transparent;display:block;max-width:400px;"
+        : "border:0;overflow:hidden;background:transparent;";
+      return `<iframe src="${src.toString()}" title="PVHS Classroom Countdown" width="100%" height="${config.height}" style="${style}" loading="lazy" scrolling="no" allowtransparency="true" allowfullscreen></iframe>`;
     }
 
     function updateEmbedCode(targetKey = activeEmbedTarget) {
