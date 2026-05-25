@@ -1758,9 +1758,25 @@
         if (isWeekend) {
           wkLabel = 'Back to School';
           const nextSD = schoolDays.find(d => d > dateStr);
+          const prevSD = [...schoolDays].reverse().find(d => d < dateStr);
           if (nextSD) {
             const cal = Math.round((new Date(nextSD + 'T12:00:00') - new Date(dateStr + 'T12:00:00')) / 86400000);
             wkRight = cal === 1 ? '1 Day' : `${cal} Days`;
+            // Bar drains full→empty over the break: full = just started, empty = school about to begin
+            if (prevSD) {
+              const todayD = new Date(dateStr + 'T12:00:00');
+              const prevOff = Math.round((new Date(prevSD + 'T12:00:00') - todayD) / 86400000);
+              const nextOff = Math.round((new Date(nextSD + 'T12:00:00') - todayD) / 86400000);
+              const prevBlks = getScheduleBlocks(prevSD);
+              const nextBlks = getScheduleBlocks(nextSD);
+              const breakStartMs = toMs(prevOff, parseToSec(prevBlks[prevBlks.length - 1].e));
+              const breakEndMs   = toMs(nextOff,  parseToSec(nextBlks[0].s));
+              wkFrac = breakStartMs < breakEndMs
+                ? (breakEndMs - nowMs) / (breakEndMs - breakStartMs)
+                : 0;
+            } else {
+              wkFrac = 0;
+            }
           }
         } else {
           const todaySchoolActive = isSD && totalSec < schoolEnd;
