@@ -1828,7 +1828,7 @@
         // For the progress bar, count from the last break's end (or stretch start) to this break
         const stretchStart = nextVac.stretchFrom;
         const totalStretchSDs = schoolDays.filter(d => d >= stretchStart && d < vacStart).length || 1;
-        const passedStretchSDs = schoolDays.filter(d => d >= stretchStart && d < dateStr).length;
+        const passedStretchSDs = schoolDays.filter(d => d >= stretchStart && d <= dateStr).length;
         const vacFrac = totalStretchSDs > 0 ? passedStretchSDs / totalStretchSDs : 0;
         setFill('vacFill', vacFrac, 'prog-bar--vac');
         setTxt('vacLabel', `Till ${vacName} ${vacEmoji}`);
