@@ -1750,11 +1750,13 @@
         if (schoolDays.includes(dStr)) weekSDs.push({ dStr, off });
       }
       if (weekSDs.length > 0) {
-        const fw = weekSDs[0], lw = weekSDs[weekSDs.length - 1];
-        const fwB = getScheduleBlocks(fw.dStr), lwB = getScheduleBlocks(lw.dStr);
-        const wkStart = toMs(fw.off, parseToSec(fwB[0].s));
-        const wkEnd   = toMs(lw.off, parseToSec(lwB[lwB.length - 1].e));
-        wkFrac = wkStart < wkEnd ? (nowMs - wkStart) / (wkEnd - wkStart) : 0;
+        const lw = weekSDs[weekSDs.length - 1];
+        const lwB = getScheduleBlocks(lw.dStr);
+        const wkEnd = toMs(lw.off, parseToSec(lwB[lwB.length - 1].e));
+        // Anchor at Monday midnight so holiday Mondays (short weeks) count as elapsed time,
+        // giving proportionally higher progress on Tue/Wed/Thu of condensed weeks.
+        const mondayMidnightMs = todayMidnightMs + offToMon * 86400000;
+        wkFrac = mondayMidnightMs < wkEnd ? (nowMs - mondayMidnightMs) / (wkEnd - mondayMidnightMs) : 0;
         if (isWeekend) {
           wkLabel = 'Back to School';
           const nextSD = schoolDays.find(d => d > dateStr);
